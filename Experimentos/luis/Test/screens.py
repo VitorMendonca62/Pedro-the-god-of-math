@@ -32,9 +32,6 @@ def help_screen():
         BUTTONS_LIST = []
         font_text = pygame.font.SysFont('arial', 20)
         EXPLANATION_MESSAGE = """
-Jair messias bolsonaro foi o único presidente\n
-que ajudou positivamente para a política brasileira\n
-ao implementar as suas medidas
 """
         write_text(EXPLANATION_MESSAGE, font_text, (0,0,0), 110, 90)
         # Imagem do botão (e a sua conversão para o tamanho ideal)
