@@ -13,7 +13,7 @@ class Level:
     self.level_photo = cv2.imread(f"./assets/levels/{self.level}/maze{random_number}.png") # Pega uma estrutura de mapa aleatorio a partir do nivel
     self.matriz = list()
 
-  def take_matriz_map(self):
+  def do_matriz_map(self):
     for column in range(self.size):
       elements_line = list() # Representa uma linha da matriz
       for line in range(self.size):
@@ -53,9 +53,3 @@ class Level:
     return self.matriz
 
 
-# todo
-
-a = [1,2,3]
-
-a[0:1]
-print(a)

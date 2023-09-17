@@ -28,28 +28,29 @@ vermelho = (255, 0, 0)
 verde = (0, 255, 0)
 azul = (0, 0, 255)
 
-class Coletavel:
-  def __init__(self, cor):
-    self.rect = pygame.Rect(random.choice([50, 200]), random.randint(50, 640-50), 30, 30)
-    self.cor = cor
+# class Coletavel:
+#   def __init__(self, cor):
+#     self.rect = pygame.Rect(random.choice([50, 200]), random.randint(50, 640-50), 30, 30)
+#     self.cor = cor
       
-pontuacoes = {vermelho: 0, verde: 0, azul: 0}
-coletaveis = [Coletavel(vermelho), Coletavel(verde), Coletavel(azul)]
+# pontuacoes = {vermelho: 0, verde: 0, azul: 0}
+# coletaveis = [Coletavel(vermelho), Coletavel(verde), Coletavel(azul)]
 
 # parte do jogo rodando
 
 while game_running:
   screen.fill((0,0,0))      
 
-  map.update()
-  
   player = pygame.draw.rect(screen, (232,123,123), (screen_center[0] - 20, screen_center[1] - 20,20*zoom,20*zoom))  
+  
+  map.update(player)
+  
 
   clock.tick(60)
   pygame.display.update()
 
-  for coletavel in coletaveis:
-    if player.rect.colliderect(coletavel.rect):
+  # for coletavel in coletaveis:
+  #   if player.rect.colliderect(coletavel.rect):
   
-      pontuacoes[coletavel.cor] += 1
-      coletaveis.remove(coletavel)
+  #     pontuacoes[coletavel.cor] += 1
+  #     coletaveis.remove(coletavel)
