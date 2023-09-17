@@ -53,4 +53,3 @@ while game_running:
   
       pontuacoes[coletavel.cor] += 1
       coletaveis.remove(coletavel)
-      coletaveis.append(Coletavel(coletavel.cor))
