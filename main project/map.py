@@ -22,8 +22,6 @@ class Map():
 
     level_0 = Level(self.number_level)
     self.matriz_game.append(level_0.do_matriz_map())
-    # collectibles = Collectibles(self.number_level)
-
     self.draw_map(self.matriz_game, self.number_level, self.screen, self.x, self.y, True)
 
   def draw_map(self,matriz,level,screen,x,y, born): 
@@ -89,11 +87,9 @@ class Map():
   def analyze_collision(self,player):
     for wall in self.walls_rects:
       if player.colliderect(wall):
-        # print("X e Y do mapa antigo", self.x, self.y)
         self.x = self.last_x
         self.y = self.last_y
         self.movimentacao = 0
-        # print("X e Y do mapa novo", self.x, self.y)
         self.walls_rects = list()
   
   def take_matriz(self,level):
