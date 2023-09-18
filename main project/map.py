@@ -1,6 +1,7 @@
 import pygame
 from level import Level, levels_size
 from collectibles import Collectibles
+from pygame.locals import *
 
 pygame.init()
 
@@ -70,19 +71,17 @@ class Map():
         pygame.quit()
         exit()
 
-      keys = pygame.key.get_pressed()
-      
-      if keys[pygame.K_w] or keys[pygame.K_s]:
-        if keys[pygame.K_w]:
-          self.y += self.movimentacao
-        if keys[pygame.K_s]:
-          self.y -= self.movimentacao
-      
-      if keys[pygame.K_a] or keys[pygame.K_d]:
-        if keys[pygame.K_a]:
-          self.x += self.movimentacao
-        if keys[pygame.K_d]:
-          self.x -= self.movimentacao
+    keys = pygame.key.get_pressed()
+    if keys[K_w] or keys[K_s]:
+      if keys[K_w]:
+        self.y = self.y + self.movimentacao
+      if keys[K_s]:
+        self.y = self.y - self.movimentacao
+    if keys[K_a] or keys[K_d]:
+      if keys[K_a]:
+        self.x = self.x + self.movimentacao
+      if keys[K_d]:  
+        self.x = self.x - self.movimentacao
 
   def analyze_collision(self,player):
     for wall in self.walls_rects:
@@ -102,5 +101,3 @@ class Map():
 
 # TO-do:
 # Fazer uma missao para passar de level
-# Fazer a colisao do personagem
-# Movimentação do mapa
