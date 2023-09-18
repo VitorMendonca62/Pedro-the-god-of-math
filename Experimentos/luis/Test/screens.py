@@ -2,43 +2,55 @@ import pygame
 from button import Button
 
 pygame.init()
+
 # Tamanho da tela 
 WIDTH = 800
-HEIGHT = 600 
+HEIGHT = 700 
 
 # Definição do tamanho da tela e definição do background
 screen = pygame.display.set_mode((WIDTH,HEIGHT)) # Cria uma tela e determina o seu tamanho
-bg_img = pygame.image.load('assets/images/background.png')
+bg_img = pygame.image.load('Experimentos/luis/assets/images/main_background.png')
 bg_img = pygame.transform.scale(bg_img,(WIDTH,HEIGHT))
 
 # Fonte 
-default_font = pygame.font.SysFont('arial', 30)
+font = pygame.font.Font('Experimentos\luis/assets/font\Pixeled.ttf', 20)
 
 def write_text(text_content, font, color, pos_x, pos_y):
     text = font.render(text_content, True, color)
     screen.blit(text, (pos_x, pos_y))
 
 def help_screen():
-    help_screen_bg = pygame.image.load('assets/images/help_screen.png')
+    
+    help_screen_bg = pygame.image.load('Experimentos\luis/assets\images\help_screen.png')
     help_screen_bg = pygame.transform.scale(help_screen_bg,(WIDTH,HEIGHT))
+    
     pygame.display.set_caption("Pedro: God of the Math") # Coloca o nome do jogo
     # Título e Ícone
-    icon = pygame.image.load('assets/images/icon.png')
+    icon = pygame.image.load('Experimentos\luis/assets\images\icon.png')
     pygame.display.set_icon(icon)
     
+    #Fonte
+    text_font = pygame.font.Font('Experimentos\luis/assets/font\Pixeled.ttf', 15)
+    tittle_font = pygame.font.Font('Experimentos\luis/assets/font\Pixeled.ttf', 30)
+
     while True:
         screen.blit(help_screen_bg, (0,0))
         mouse_pos = pygame.mouse.get_pos()
         BUTTONS_LIST = []
-        font_text = pygame.font.SysFont('arial', 20)
-        EXPLANATION_MESSAGE = """
-"""
-        write_text(EXPLANATION_MESSAGE, font_text, (0,0,0), 110, 90)
+        #write_text("O objetivo do jogo é passar pelo labirinto colentando", font, (0,0,0), 110, 90)
         # Imagem do botão (e a sua conversão para o tamanho ideal)
-        BUTTON_IMAGE = pygame.image.load("assets/images/start_button.png")
+        BUTTON_IMAGE = pygame.image.load("Experimentos\luis/assets\images\start_button.png")
         BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (251, 81))
-
+        STRING_LIST = ["O objetivo do jogo é passar pelo labirinto", "coletando os itens dispostos no mapa.", "Para jogar, utilize as teclas W A S D para movi-", "mentar o personagem. Divirta-se :)"] 
+        initial_x = 110
+        initial_y = 150
         
+        write_text("INSTRUÇOES", tittle_font, (0,0,0), 110, 80)
+
+        for line in STRING_LIST:
+            write_text(line, text_font, (0,0,0), initial_x, initial_y)
+            initial_y += 30
+
         for i in BUTTONS_LIST:
             i.interaction_text_color(mouse_pos)
             i.update(screen)
@@ -60,9 +72,8 @@ def help_screen():
 
 def main_menu():
     pygame.display.set_caption("Pedro: God of the Math") # Coloca o nome do jogo
-    
     # Título e Ícone
-    icon = pygame.image.load('assets/images/icon.png')
+    icon = pygame.image.load('Experimentos\luis/assets\images\icon.png')
     pygame.display.set_icon(icon)
     
     while True:
@@ -72,15 +83,15 @@ def main_menu():
         BUTTONS_LIST = []
 
         # Imagem do botão (e a sua conversão para o tamanho ideal)
-        BUTTON_IMAGE = pygame.image.load("assets/images/start_button.png")
+        BUTTON_IMAGE = pygame.image.load("Experimentos\luis/assets\images\start_button.png")
         BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (251, 81))
 
         # Botão de iniciar o jogo
-        START_BUTTON = Button(BUTTON_IMAGE, 400, 250, default_font, "Iniciar")
+        START_BUTTON = Button(BUTTON_IMAGE, 200, 500, font, "INICIAR")
         BUTTONS_LIST.append(START_BUTTON)
         
         # Botão de fechar o jogo
-        QUIT_BUTTON = Button(BUTTON_IMAGE, 400, 350, default_font, "Sair")
+        QUIT_BUTTON = Button(BUTTON_IMAGE, 600, 500, font, "SAIR")
         BUTTONS_LIST.append(QUIT_BUTTON)
         
         for i in BUTTONS_LIST:
