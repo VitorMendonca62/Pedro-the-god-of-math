@@ -48,6 +48,7 @@ class Level:
             string += "S"
 
         elements_line.append(string)
+      print(self.matriz)
       self.matriz.append(elements_line)
 
     return self.matriz

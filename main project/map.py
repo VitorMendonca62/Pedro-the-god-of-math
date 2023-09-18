@@ -1,6 +1,7 @@
 import pygame
-import pygame.locals
 from level import Level, levels_size
+from collectibles import Collectibles
+from pygame.locals import *
 
 pygame.init()
 
@@ -16,13 +17,12 @@ class Map():
     self.number_level = 0
     self.x = 0
     self.y = 0
-
+    self.movimentacao = 2
     self.last_x = 0
     self.last_y = 0
 
     level_0 = Level(self.number_level)
     self.matriz_game.append(level_0.do_matriz_map())
-
     self.draw_map(self.matriz_game, self.number_level, self.screen, self.x, self.y, True)
 
   def draw_map(self,matriz,level,screen,x,y, born): 
@@ -61,38 +61,39 @@ class Map():
               self.x = - bigger_wall_size * (column) + bigger_wall_size * smalller_wall_size
               self.y = - bigger_wall_size * (line / 2 + 2) - bigger_wall_size / 2 + smalller_wall_size
             
-
   def move_map(self,player):
+    self.last_x = self.x
+    self.last_y = self.y 
+
+    self.movimentacao = 2
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
         exit()
 
-      keys = pygame.key.get_pressed()
-
-      if self.last_x != self.x: self.last_x = self.x
-      if self.last_y != self.y: self.last_y = self.y 
-
-      if keys[pygame.K_w] or keys[pygame.K_s]:
-        if keys[pygame.K_w]:
-          self.y += 2
-        if keys[pygame.K_s]:
-          self.y -= 2
-      
-      if keys[pygame.K_a] or keys[pygame.K_d]:
-        if keys[pygame.K_a]:
-          self.x += 2
-        if keys[pygame.K_d]:
-          self.x -= 2
+    keys = pygame.key.get_pressed()
+    if keys[K_w] or keys[K_s]:
+      if keys[K_w]:
+        self.y = self.y + self.movimentacao
+      if keys[K_s]:
+        self.y = self.y - self.movimentacao
+    if keys[K_a] or keys[K_d]:
+      if keys[K_a]:
+        self.x = self.x + self.movimentacao
+      if keys[K_d]:  
+        self.x = self.x - self.movimentacao
 
   def analyze_collision(self,player):
     for wall in self.walls_rects:
       if player.colliderect(wall):
         self.x = self.last_x
         self.y = self.last_y
-
+        self.movimentacao = 0
         self.walls_rects = list()
   
+  def take_matriz(self,level):
+    return self.matriz_game[level]
+
   def update(self,player):
     self.analyze_collision(player)
     self.move_map(player)
@@ -100,5 +101,3 @@ class Map():
 
 # TO-do:
 # Fazer uma missao para passar de level
-# Fazer a colisao do personagem
-# Movimentação do mapa
