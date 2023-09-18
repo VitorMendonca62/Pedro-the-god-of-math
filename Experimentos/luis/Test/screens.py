@@ -36,11 +36,15 @@ def help_screen():
     while True:
         screen.blit(help_screen_bg, (0,0))
         mouse_pos = pygame.mouse.get_pos()
-        BUTTONS_LIST = []
-        #write_text("O objetivo do jogo é passar pelo labirinto colentando", font, (0,0,0), 110, 90)
         # Imagem do botão (e a sua conversão para o tamanho ideal)
-        BUTTON_IMAGE = pygame.image.load("Experimentos\luis/assets\images\start_button.png")
-        BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (251, 81))
+        BUTTON_IMAGE = pygame.image.load("Experimentos\luis/assets\images\exit_icon.png")
+        BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (30, 30))
+
+        QUIT_BUTTON = Button(BUTTON_IMAGE, 700, 87, font, "")
+        QUIT_BUTTON.update(screen)
+        
+
+        
         STRING_LIST = ["O objetivo do jogo é passar pelo labirinto", "coletando os itens dispostos no mapa.", "Para jogar, utilize as teclas W A S D para movi-", "mentar o personagem. Divirta-se :)"] 
         initial_x = 110
         initial_y = 150
@@ -51,21 +55,13 @@ def help_screen():
             write_text(line, text_font, (0,0,0), initial_x, initial_y)
             initial_y += 30
 
-        for i in BUTTONS_LIST:
-            i.interaction_text_color(mouse_pos)
-            i.update(screen)
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            #if event.type == pygame.MOUSEBUTTONDOWN:
-                #if START_BUTTON.clicked(mouse_pos):
-                   # print("Clicado")
-                #if QUIT_BUTTON.clicked(mouse_pos):
-                    #print("Clicado a parte de sair")
-                    #pygame.quit()
-                    #exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if QUIT_BUTTON.clicked(mouse_pos):
+                    main_menu()
 
         pygame.display.update()
 
@@ -91,8 +87,8 @@ def main_menu():
         BUTTONS_LIST.append(START_BUTTON)
         
         # Botão de fechar o jogo
-        QUIT_BUTTON = Button(BUTTON_IMAGE, 600, 500, font, "SAIR")
-        BUTTONS_LIST.append(QUIT_BUTTON)
+        INSTRUCTIONS_BUTTON = Button(BUTTON_IMAGE, 600, 500, font, "INSTRUÇOES")
+        BUTTONS_LIST.append(INSTRUCTIONS_BUTTON)
         
         for i in BUTTONS_LIST:
             i.interaction_text_color(mouse_pos)
@@ -104,12 +100,9 @@ def main_menu():
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if START_BUTTON.clicked(mouse_pos):
-                    help_screen()
                     print("Clicado")
-                if QUIT_BUTTON.clicked(mouse_pos):
-                    print("Clicado a parte de sair")
-                    pygame.quit()
-                    exit()
+                if INSTRUCTIONS_BUTTON.clicked(mouse_pos):
+                    help_screen()
 
         pygame.display.update()
 
