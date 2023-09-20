@@ -30,10 +30,10 @@ class Map():
 
   def draw_map(self,screen,x,y,born): 
     square_size = 60 # Tamanho do quadrado
+    height_square_size = 4 # Tamanho do quadrado
 
     for line in range(self.size_map):
       for column in range(self.size_map):
-
         items = list(self.matriz_game[line][column]) # vai ser os simbolos de um elemento da matriz, por exemplo <^Sy
 
         for item in items:
@@ -46,12 +46,16 @@ class Map():
             item_x += 60
           elif item == "v":
             item_y += 60
-            item_x += 4
 
-          if item == "<" or item == ">":
-            image = vertical_wall
-          elif item == "^" or item == "v":
-            image = horizontal_wall
+          if item in ("<","^", ">", "v"):
+            if item == "<" or item == ">":
+              rect = pygame.Rect(item_x, item_y, height_square_size, square_size)
+            elif item == "^" or item == "v":
+              rect = pygame.Rect(item_x, item_y, square_size, height_square_size)
+            
+            self.walls_rects.append(rect)
+            pygame.draw.rect(screen, (255,255,255), rect)
+
           
           # Desenhar os coletaveis
           if item == "r":
@@ -63,8 +67,6 @@ class Map():
           if item == "y":
             pygame.draw.rect(screen, (255,255,0), (item_x+22, item_y+22,20,20))
 
-          rect = screen.blit(image,(item_x,item_y))
-          self.walls_rects.append(rect)
 
           if item == "S" and born:
             self.x = - square_size * (column) + square_size * 4 
