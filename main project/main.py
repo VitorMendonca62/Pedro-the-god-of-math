@@ -20,11 +20,7 @@ clock = pygame.time.Clock()
 
 map = Map(screen)
 
-white = (255, 255, 255)
-black = (0, 0, 0)
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
+
 
 while game_running:
   screen.fill((0,0,0))      

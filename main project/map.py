@@ -1,71 +1,80 @@
 import pygame
-from level import Level, levels_size
-from collectibles import Collectibles
+from level import Level
 from pygame.locals import *
 
 pygame.init()
 
-white = (255,255,255)
 vertical_wall = pygame.image.load("assets/vertical-wall.png")
 horizontal_wall = pygame.image.load("assets/horizontal-wall.png")
 
 class Map():
   def __init__(self,screen):
     self.screen = screen
-    self.walls_rects = list()
-    self.matriz_game = list()  
-    self.number_level = 0
-    self.x = 0
-    self.y = 0
-    self.movimentacao = 2
-    self.last_x = 0
+    self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
+    # É no eixo das abscissas e ordenadas onde o mapa está localizado
+    self.x = 0 
+    self.y = 0 
+    # Ultimo valor de x e y  que foi atribuiddo
+    self.last_x = 0 
     self.last_y = 0
+    self.size_map = 15 # tamanho do mapa
 
-    level_0 = Level(self.number_level)
-    self.matriz_game.append(level_0.do_matriz_map())
-    self.draw_map(self.matriz_game, self.number_level, self.screen, self.x, self.y, True)
+    level = Level()
+    self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
+    self.draw_map(self.screen, self.x, self.y, True) # Vai desenhar o mapa
+    
+    self.matriz_game[0][0] += "r"
+    self.matriz_game[0][14] += "g"
+    self.matriz_game[14][0] += "b"
+    self.matriz_game[14][14] += "y"
 
-  def draw_map(self,matriz,level,screen,x,y, born): 
-    bigger_wall_size = 60
-    smalller_wall_size = 4
-    level = 1
-    for matriz_level in matriz:
-      for line in range(levels_size[level]):
-        for column in range(levels_size[level]):
+  def draw_map(self,screen,x,y,born): 
+    square_size = 60 # Tamanho do quadrado
 
-          direction_walls = list(matriz_level[line][column])
+    for line in range(self.size_map):
+      for column in range(self.size_map):
 
-          for direction in direction_walls:
-            wall_x = bigger_wall_size * column + x
-            wall_y = bigger_wall_size * line + y
+        items = list(self.matriz_game[line][column]) # vai ser os simbolos de um elemento da matriz, por exemplo <^Sy
 
-            if direction == "<":
-              pass
-            if direction == ">":
-              wall_x += 60
-            if direction == "v":
-              wall_y += 60
-              wall_x += 4
-            if direction == "^":
-              pass
+        for item in items:
+          # indicar em qual coordenada o item vai ficar, é a partir do tamanho do quadrado e onde o item ta localizado na matriz e um valor dinamico x ou y, isso faz com que o mapa movimente a partir das teclas pressioandas
+          item_x = square_size * column + x
+          item_y = square_size * line + y
 
-            if direction == "<" or direction == ">":
-              image = vertical_wall
-            elif direction == "^" or direction == "v":
-              image = horizontal_wall
+          # desenhando as paredes
+          if item == ">":
+            item_x += 60
+          elif item == "v":
+            item_y += 60
+            item_x += 4
 
-            rect = screen.blit(image,(wall_x,wall_y))
-            self.walls_rects.append(rect)
+          if item == "<" or item == ">":
+            image = vertical_wall
+          elif item == "^" or item == "v":
+            image = horizontal_wall
+          
+          # Desenhar os coletaveis
+          if item == "r":
+            pygame.draw.rect(screen, (255,0,0), (item_x+22, item_y+22,20,20))
+          if item == "g":
+            pygame.draw.rect(screen, (0, 255, 0), (item_x+22, item_y+22,20,20))
+          if item == "b":
+            pygame.draw.rect(screen, (0, 0, 255), (item_x+22, item_y+22,20,20))
+          if item == "y":
+            pygame.draw.rect(screen, (255,255,0), (item_x+22, item_y+22,20,20))
 
-            if direction == "S" and born:
-              self.x = - bigger_wall_size * (column) + bigger_wall_size * smalller_wall_size
-              self.y = - bigger_wall_size * (line / 2 + 2) - bigger_wall_size / 2 + smalller_wall_size
+          rect = screen.blit(image,(item_x,item_y))
+          self.walls_rects.append(rect)
+
+          if item == "S" and born:
+            self.x = - square_size * (column) + square_size * 4 
+            self.y = - square_size * (line / 2 + 2) - square_size / 2 
             
-  def move_map(self,player):
+  def move_map(self):
     self.last_x = self.x
     self.last_y = self.y 
 
-    self.movimentacao = 2
+    self.pace = 4
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
@@ -74,30 +83,28 @@ class Map():
     keys = pygame.key.get_pressed()
     if keys[K_w] or keys[K_s]:
       if keys[K_w]:
-        self.y = self.y + self.movimentacao
+        self.y = self.y + self.pace
       if keys[K_s]:
-        self.y = self.y - self.movimentacao
+        self.y = self.y - self.pace
     if keys[K_a] or keys[K_d]:
       if keys[K_a]:
-        self.x = self.x + self.movimentacao
+        self.x = self.x + self.pace
       if keys[K_d]:  
-        self.x = self.x - self.movimentacao
+        self.x = self.x - self.pace
 
   def analyze_collision(self,player):
     for wall in self.walls_rects:
       if player.colliderect(wall):
         self.x = self.last_x
         self.y = self.last_y
-        self.movimentacao = 0
+        self.pace = 0
         self.walls_rects = list()
-  
-  def take_matriz(self,level):
-    return self.matriz_game[level]
 
   def update(self,player):
     self.analyze_collision(player)
-    self.move_map(player)
-    self.draw_map(self.matriz_game, self.number_level, self.screen, self.x, self.y, False)
+    self.move_map()
+    self.draw_map(self.screen, self.x, self.y, False)
 
 # TO-do:
 # Fazer uma missao para passar de level
+
