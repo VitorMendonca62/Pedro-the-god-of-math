@@ -9,6 +9,7 @@ horizontal_wall = pygame.image.load("assets/horizontal-wall.png")
 
 class Map():
   def __init__(self,screen):
+    self.all_collectibles = list() # todos os coletaveis
     self.screen = screen
     self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
@@ -23,10 +24,30 @@ class Map():
     self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
     self.draw_map(self.screen, self.x, self.y, True) # Vai desenhar o mapa
     
-    self.matriz_game[0][0] += "r"
-    self.matriz_game[0][14] += "g"
-    self.matriz_game[14][0] += "b"
-    self.matriz_game[14][14] += "y"
+    # escolhendo os pontos a desenhar os coletáveis na tela
+    # em cada "quadrante" do labirinto vai ser possível o spawn de uma determinada cor de coletável
+    
+    # parte superor esquerda do labirinto com red
+    self.r_adress_x = random.choice([0, 6])
+    self.r_adress_y = random.choice([0, 6])
+    self.matriz_game[0][self.r_adress_x][self.r_adress_y] += "r"
+    
+    # parte superior direita do labirinto com green
+    self.g_adress_x = random.choice([7, 14])
+    self.g_adress_y = random.choice([0, 6])
+    self.matriz_game[0][self.g_adress_x][self.g_adress_y] += "g"
+
+    # parte inferior esquerda do labirinto com blue
+    self.b_adress_x = random.choice([0, 6])
+    self.b_adress_y = random.choice([7, 14])
+    self.matriz_game[0][self.b_adress_x][self.b_adress_y] += "b"
+
+    # parte inferior direita do labirinto com yellow
+    self.y_adress_x = random.choice([7, 14])
+    self.y_adress_y = random.choice([7, 14])
+    self.matriz_game[0][self.y_adress_x][self.y_adress_y] += "y"
+
+    # fim da escolha dos pontos
 
   def draw_map(self,screen,x,y,born): 
     square_size = 60 # Tamanho do quadrado
@@ -57,15 +78,27 @@ class Map():
             pygame.draw.rect(screen, (255,255,255), rect)
 
           
-          # Desenhar os coletaveis
-          if item == "r":
-            pygame.draw.rect(screen, (255,0,0), (item_x+22, item_y+22,20,20))
-          if item == "g":
-            pygame.draw.rect(screen, (0, 255, 0), (item_x+22, item_y+22,20,20))
-          if item == "b":
-            pygame.draw.rect(screen, (0, 0, 255), (item_x+22, item_y+22,20,20))
-          if item == "y":
-            pygame.draw.rect(screen, (255,255,0), (item_x+22, item_y+22,20,20))
+          # desenhando coletáveis na tela dados os pontos escolhidos
+          red = (255, 0, 0)
+          green = (0, 255, 0)
+          blue = (0, 0, 255)
+          yellow = (255,255,0)
+
+          colle_x = wall_x + 22
+          colle_y = wall_y + 22
+
+          if direction == "r":
+            self.all_collectibles.append(Collectible(screen,red,colle_x,colle_y,"r"))
+
+          if direction == "g":
+            self.all_collectibles.append(Collectible(screen,green,colle_x,colle_y,"g"))
+
+          if direction == "b":
+            self.all_collectibles.append(Collectible(screen,blue,colle_x,colle_y,"b"))
+
+          if direction == "y":
+            self.all_collectibles.append(Collectible(screen,yellow,colle_x,colle_y,"y"))
+          # fim do desenho dos coletáveis
 
 
           if item == "S" and born:
@@ -101,6 +134,27 @@ class Map():
         self.y = self.last_y
         self.pace = 0
         self.walls_rects = list()
+        
+    # analisando a colisão com os coletáveis
+    for colle in self.all_collectibles:
+      if player.colliderect(colle):
+
+        if colle.id == "r":
+          self.matriz_game[0][self.r_adress_x][self.r_adress_y] = self.matriz_game[0][self.r_adress_x][self.r_adress_y][:-1]
+          colle.collected = True
+
+        if colle.id == "g":
+          self.matriz_game[0][self.g_adress_x][self.g_adress_y] = self.matriz_game[0][self.g_adress_x][self.g_adress_y][:-1]
+          colle.collected = True
+
+        if colle.id == "b":
+          self.matriz_game[0][self.b_adress_x][self.b_adress_y] = self.matriz_game[0][self.b_adress_x][self.b_adress_y][:-1]
+          colle.collected = True
+
+        if colle.id == "y":
+          self.matriz_game[0][self.y_adress_x][self.y_adress_y] = self.matriz_game[0][self.y_adress_x][self.y_adress_y][:-1]
+          colle.collected = True
+    # fim da analise da colisão
 
   def update(self,player):
     self.analyze_collision(player)
