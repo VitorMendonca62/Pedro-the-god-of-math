@@ -24,6 +24,20 @@ class Map():
     # Escolha a quantidade de cada coletável:
     self.symbols_collectibles = {"r":1,"g":5,"b":3,"y":2}
 
+    # Me prevenindo caso você tenha escolhido uma quantidade muito grande
+    total_collectibles = 0
+    
+    for number in self.symbols_collectibles.values():
+      total_collectibles += number
+    
+    if total_collectibles >= 255:
+      self.works = False
+      # nesse caso o loop principal da main nem executa
+      return
+    
+    else:
+      self.works = True
+
     # Esse dicionário que vai mostrar quanto foi coletado de cada um:
     self.collected = {"r":0,"g":0,"b":0,"y":0}
 
