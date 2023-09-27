@@ -1,7 +1,9 @@
 import pygame
 import random
 from colors import *
-    # self.rect = pygame.draw.rect(screen,self.color,(x,colle_y,20,20))
+
+# Para escolher a quantidade de coletáveis, vá em map
+# Modifique os números no dicionário symbols_collectibles
 
 class Collectible():
   def __init__(self, item):
