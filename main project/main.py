@@ -3,6 +3,7 @@ from pygame.locals import *
 from map import *
 from sys import exit
 from level import *
+from colors import *
 
 pygame.init()
 
@@ -20,14 +21,35 @@ clock = pygame.time.Clock()
 
 map = Map(screen)
 
-
+def desenhar_texto(texto, tamanho, cor, x, y):
+    fonte = pygame.font.Font(None, tamanho)
+    texto = fonte.render(texto, True, cor)
+    screen.blit(texto, (x, y))
 
 while game_running:
   screen.fill((0,0,0))      
 
   player = pygame.draw.rect(screen, (232,123,123), (screen_center[0] - 20, screen_center[1] - 20,20*zoom,20*zoom))  
   map.update(player)
+
+  # desenhando o placar
+
+  pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
+
+  dist = 170
+  pos = 10
+
+  pygame.draw.rect(screen,red,(10+dist*0,height-27,20,20))
+  desenhar_texto(f"({map.collected['r']}/{map.symbols_collectibles['r']})",30,white,35,height-27)
   
+  pygame.draw.rect(screen,green,(10+dist*1,height-27,20,20))
+  desenhar_texto(f"({map.collected['g']}/{map.symbols_collectibles['g']})",30,white,35+dist*1,height-27)
+  
+  pygame.draw.rect(screen,blue,(10+dist*2,height-27,20,20))
+  desenhar_texto(f"({map.collected['b']}/{map.symbols_collectibles['b']})",30,white,35+dist*2,height-27)
+  
+  pygame.draw.rect(screen,yellow,(10+dist*3,height-27,20,20))
+  desenhar_texto(f"({map.collected['y']}/{map.symbols_collectibles['y']})",30,white,35+dist*3,height-27)
+
   clock.tick(30)
   pygame.display.update()
-
