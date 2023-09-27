@@ -8,28 +8,22 @@ class Collectible():
     self.item = item
     self.all_collectibles = list()
     self.rect = pygame.Rect(0,0, 0, 0)
-    
-    self.row = 0
-    self.column = 0
+    self.collected = False
 
-    if item == "r": self.color = red
-    if item == "g": self.color = green
-    if item == "b": self.color = blue
-    if item == "y": self.color = yellow
+    if item == "r": 
+      self.color = red
+      self.name = "Vermelho"
+    if item == "g": 
+      self.color = green
+      self.name = "Verde"
+    if item == "b": 
+      self.color = blue
+      self.name = "Azul"
+    if item == "y": 
+      self.color = yellow
+      self.name = "Amarelo"
 
-    choice = self.take_choice(item)
-    self.row = random.choice(choice[0])
-    self.column = random.choice(choice[1])
+    self.row = random.choice(range(0,14))
+    self.column = random.choice(range(0,14))
 
-  def analyze_collision(self, player,matriz):
-    if player.colliderect(self.rect):
-      matriz[self.row][self.column] = matriz[self.row][self.column][:-1]
-    return player.colliderect(self.rect)
-
-  def take_choice(self, item):
-    interval0_6 = range(0,6)
-    interval7_14 =  range(7,14)
-    if item == "r": return [interval0_6, interval0_6]
-    if item == "g": return [interval7_14, interval0_6]
-    if item == "b": return [interval0_6, interval7_14]
-    if item == "y": return [interval7_14, interval7_14]
+    self.adress = (self.row,self.column)
