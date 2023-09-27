@@ -35,7 +35,7 @@ def desenhar_texto(texto, tamanho, cor, x, y):
     texto = fonte.render(texto, True, cor)
     screen.blit(texto, (x, y))
 
-while game_running:
+while game_running and play:
   screen.fill((0,0,0))      
 
   player = pygame.draw.rect(screen, (232,123,123), (screen_center[0] - 20, screen_center[1] - 20,20*zoom,20*zoom))  
