@@ -19,19 +19,31 @@ class Map():
     self.last_x = 0 
     self.last_y = 0
     self.size_map = 15 # tamanho do mapa
+    self.colle_adresses = list()
 
-    self.symbols_collectibles = ("r","g","b","y")
+    # Escolha a quantidade de cada um:
+    self.symbols_collectibles = {"r":1,"g":5,"b":3,"y":2}
+
+    # O dicionário que vai mostrar quanto foi coletado de cada um:
+    self.collected = {"r":0,"g":0,"b":0,"y":0}
 
     level = Level()
     self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
     self.draw_map(self.screen, self.x, self.y, True) # Vai desenhar o mapa
-     
-    self.collected = 0
 
-    for symbol in self.symbols_collectibles:
-      collectible = Collectible(symbol)
-      self.collectibles.append(collectible)
-      self.matriz_game[collectible.row][collectible.column] += symbol
+    for symbol in self.symbols_collectibles.keys():
+      for _ in range(self.symbols_collectibles[symbol]): # quantos desse tipo eu quero
+        
+        search_adress = True
+        
+        while search_adress:
+          collectible = Collectible(symbol)
+
+          if collectible.adress not in self.colle_adresses: # se o endereço não foi usado
+            search_adress = False
+        
+        self.collectibles.append(collectible)
+        self.matriz_game[collectible.row][collectible.column] += symbol
 
   def draw_map(self, screen, x, y, born): 
     square_size = 60 # Tamanho do quadrado
@@ -61,18 +73,15 @@ class Map():
             self.walls_rects.append(rect)
             pygame.draw.rect(screen, (255,255,255), rect)
 
-          if item in self.symbols_collectibles:
+          if item in self.symbols_collectibles.keys():
             item_x += 22
             item_y += 22
             size = 20
 
             for collectible in self.collectibles:
-              if collectible.item == item:
-                rect = pygame.Rect(item_x,item_y, size, size)
-                pygame.draw.rect(screen, collectible.color, rect)
-                collectible.rect = rect
-                collectible.row = row
-                collectible.column = column
+              if collectible.row == row and collectible.column == column:
+                collectible.rect = pygame.Rect(item_x, item_y, size, size)
+                pygame.draw.rect(screen, collectible.color, collectible.rect)
             
           if item == "S" and born:
             self.x = - square_size * (column) + square_size * 4 
@@ -82,7 +91,7 @@ class Map():
     self.last_x = self.x
     self.last_y = self.y 
 
-    self.pace = 4
+    self.pace = 4 + 4
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
@@ -101,18 +110,21 @@ class Map():
         self.x = self.x - self.pace
 
   def analyze_collision(self,player):
+    """
     for wall in self.walls_rects:
       if player.colliderect(wall):
         self.x = self.last_x
         self.y = self.last_y
         self.pace = 0
-        self.walls_rects = list()
+        self.walls_rects = list()"""
 
     for collectible in self.collectibles:
-      is_collision = collectible.analyze_collision(player, self.matriz_game)
-      if is_collision:
+      #is_collision = collectible.analyze_collision(player, self.matriz_game)
+      if collectible.rect.colliderect(player) and not collectible.collected:
         self.collectibles.remove(collectible)
-        self.collected += 1
+        self.matriz_game[collectible.row][collectible.column] = self.matriz_game[collectible.row][collectible.column][:-1]
+        self.collected[collectible.item] += 1
+        collectible.collected = True
         print(self.collected)
 
   def update(self,player):
@@ -122,4 +134,3 @@ class Map():
 
 # TO-do:
 # Fazer uma missao para passar de level
-
