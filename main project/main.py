@@ -21,6 +21,15 @@ clock = pygame.time.Clock()
 
 map = Map(screen)
 
+# prevenindo contra erro de quantidade de coletáveis
+if map.works:
+  play = True
+
+else:
+  play = False
+  print("\n\nSe liga pq falhou:\n")
+  print("Não tem espaço para todos esses coletáveis no labirinto.\n\nVá com calma :)\n\nDiminua a quantidade de coletáveis que dá certo.\n\n")
+
 def desenhar_texto(texto, tamanho, cor, x, y):
     fonte = pygame.font.Font(None, tamanho)
     texto = fonte.render(texto, True, cor)
