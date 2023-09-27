@@ -21,10 +21,10 @@ class Map():
     self.size_map = 15 # tamanho do mapa
     self.colle_adresses = list()
 
-    # Escolha a quantidade de cada um:
+    # Escolha a quantidade de cada coletável:
     self.symbols_collectibles = {"r":1,"g":5,"b":3,"y":2}
 
-    # O dicionário que vai mostrar quanto foi coletado de cada um:
+    # Esse dicionário que vai mostrar quanto foi coletado de cada um:
     self.collected = {"r":0,"g":0,"b":0,"y":0}
 
     level = Level()
