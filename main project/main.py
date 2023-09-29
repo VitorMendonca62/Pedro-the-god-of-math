@@ -61,23 +61,23 @@ while game_running and play:
   map.update(player)
   
 
-  # desenhando o placar
-  #pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
+   #desenhando o placar
+  pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
 
   #dist = 170
   #pos = 10
 
-  #pygame.draw.rect(screen,red,(10+dist*0,height-27,20,20))
-  #desenhar_texto(f"({map.collected['r']}/{map.symbols_collectibles['r']})",30,white,35,height-27)
+  pygame.draw.rect(screen,red,(10,height-27,20,20))
+  desenhar_texto(f"({map.collected['r']}/{map.symbols_collectibles['r']})",30,white,35,height-27)
   
-  #pygame.draw.rect(screen,green,(10+dist*1,height-27,20,20))
-  #desenhar_texto(f"({map.collected['g']}/{map.symbols_collectibles['g']})",30,white,35+dist*1,height-27)
+  pygame.draw.rect(screen,green,(10+150*1,height-27,20,20))
+  desenhar_texto(f"({map.collected['g']}/{map.symbols_collectibles['g']})",30,white,35+150*1,height-27)
   
-  #pygame.draw.rect(screen,blue,(10+dist*2,height-27,20,20))
-  #desenhar_texto(f"({map.collected['b']}/{map.symbols_collectibles['b']})",30,white,35+dist*2,height-27)
+  pygame.draw.rect(screen,blue,(10+150*2,height-27,20,20))
+  desenhar_texto(f"({map.collected['b']}/{map.symbols_collectibles['b']})",30,white,35+150*2,height-27)
   
-  #pygame.draw.rect(screen,yellow,(10+dist*3,height-27,20,20))
-  #desenhar_texto(f"({map.collected['y']}/{map.symbols_collectibles['y']})",30,white,35+dist*3,height-27)
+  pygame.draw.rect(screen,yellow,(10+150*3,height-27,20,20))
+  desenhar_texto(f"({map.collected['y']}/{map.symbols_collectibles['y']})",30,white,35+150*3,height-27)
 
   clock.tick(30)
   pygame.display.update()

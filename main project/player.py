@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.current_left = 7
         self.current_down = 10
         self.image = self.sprites[self.current_sprite]
-        self.image = pygame.transform.scale(self.image, (13*2, 21*2))
+        self.image = pygame.transform.scale(self.image, (12*2, 21*2))
         self.rect = self.image.get_rect()
         self.rect.topleft = 307, 298
 
@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_down > 12.2:
             self.current_down = 10
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (13*2, 22*2)) 
+        self.image = pygame.transform.scale(self.image, (12*2, 21*2)) 
 
     def cima(self, x, y):
         self.image = self.sprites[int(self.current_up)]
@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_up >= 4:
             self.current_up = 1
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (13*2, 22*2))  
+        self.image = pygame.transform.scale(self.image, (12*2, 21*2))  
 
     def direita(self, x, y):
         self.image = self.sprites[int(self.current_right)] 
@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_right >= 7:
             self.current_right = 4
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (13*2, 23*2))  
+        self.image = pygame.transform.scale(self.image, (12*2, 21*2))  
 
     def esquerda(self, x, y):
         self.image = self.sprites[int(self.current_left)]   
@@ -59,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_left >= 10:
             self.current_left = 7
         self.rect.topleft = x, y 
-        self.image = pygame.transform.scale(self.image, (13*2, 22*2))           
+        self.image = pygame.transform.scale(self.image, (12*2, 21*2))           
     def parado(self, x, y):
         self.image = self.sprites[0]
         self.rect.topleft = x, y

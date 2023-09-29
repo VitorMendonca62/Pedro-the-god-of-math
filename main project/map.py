@@ -14,8 +14,11 @@ class Map():
     self.collectibles = list() # todos os coletaveis
     self.screen = screen
     self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
+    horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
+    vertical_walls = pygame.image.load('sprites/vertical_woods.png')
+
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
-    self.x = 0 
+    self.x = 5
     self.y = 0 
     # Ultimo valor de x e y  que foi atribuiddo
     self.last_x = 0 
