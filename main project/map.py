@@ -3,6 +3,7 @@ from level import Level
 from pygame.locals import *
 from collectibles import *
 from colors import *
+from player import Player
 
 pygame.init()
 
@@ -105,7 +106,7 @@ class Map():
     self.last_x = self.x
     self.last_y = self.y 
 
-    self.pace = 4 + 4
+    self.pace = 4 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
@@ -115,23 +116,27 @@ class Map():
     if keys[K_w] or keys[K_s]:
       if keys[K_w]:
         self.y = self.y + self.pace
+      
       if keys[K_s]:
         self.y = self.y - self.pace
+      
     if keys[K_a] or keys[K_d]:
       if keys[K_a]:
         self.x = self.x + self.pace
+      
       if keys[K_d]:  
         self.x = self.x - self.pace
-
+       
+  
+  
   def analyze_collision(self,player):
-    """
+    '''
     for wall in self.walls_rects:
       if player.colliderect(wall):
         self.x = self.last_x
         self.y = self.last_y
         self.pace = 0
-        self.walls_rects = list()"""
-
+        self.walls_rects = list()'''
     for collectible in self.collectibles:
       #is_collision = collectible.analyze_collision(player, self.matriz_game)
       if collectible.rect.colliderect(player) and not collectible.collected:
@@ -140,7 +145,6 @@ class Map():
         self.collected[collectible.item] += 1
         collectible.collected = True
         print(self.collected)
-
   def update(self,player):
     self.analyze_collision(player)
     self.move_map()
