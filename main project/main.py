@@ -55,11 +55,11 @@ while game_running and play:
     if keys[K_a]:
       player.esquerda(307, 298)       
     if keys[K_d]:
-      player.direita(307, 298)   
- 
+      player.direita(307, 298)       
   all_sprites.draw(screen)
   all_sprites.update()
   map.update(player)
+  
 
   # desenhando o placar
   #pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
