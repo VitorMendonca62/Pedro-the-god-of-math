@@ -4,7 +4,7 @@ from map import *
 from sys import exit
 from level import *
 from colors import *
-from player import Player
+from player import *
 
 pygame.init()
 
@@ -22,6 +22,7 @@ clock = pygame.time.Clock()
 
 map = Map(screen)
 
+screen.blit(map.background, (0, 0))
 player = Player(307, 298) 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
@@ -42,23 +43,11 @@ def desenhar_texto(texto, tamanho, cor, x, y):
     screen.blit(texto, (x, y))
 
 while game_running and play:
-  screen.fill((0,0,0))      
-
-  keys = pygame.key.get_pressed()
-  if keys[K_w] or keys[K_s]:
-    if keys[K_w]:
-      player.cima(307, 298)      
-    if keys[K_s]:
-      player.baixo(307, 298) 
-     
-  if keys[K_a] or keys[K_d]:
-    if keys[K_a]:
-      player.esquerda(307, 298)       
-    if keys[K_d]:
-      player.direita(307, 298)       
-  all_sprites.draw(screen)
+  screen.fill((0,0,0))    
   all_sprites.update()
   map.update(player)
+  player_movement(player)       
+  all_sprites.draw(screen)
   
 
    #desenhando o placar

@@ -64,6 +64,16 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprites[0]
         self.rect.topleft = x, y
         self.image = pygame.transform.scale(self.image, (13*2, 22*2))
-        
-    
-#linha 730
+def player_movement(player):
+    keys = pygame.key.get_pressed()
+    if keys[K_w] or keys[K_s]:
+        if keys[K_w]:
+            player.cima(307, 298)
+        if keys[K_s]:
+            player.baixo(307, 298)
+
+    if keys[K_a] or keys[K_d]:
+        if keys[K_a]:
+            player.esquerda(307, 298)
+        if keys[K_d]:
+            player.direita(307, 298)

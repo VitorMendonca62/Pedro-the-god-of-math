@@ -14,9 +14,9 @@ class Map():
     self.collectibles = list() # todos os coletaveis
     self.screen = screen
     self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
-    horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
-    vertical_walls = pygame.image.load('sprites/vertical_woods.png')
-
+    self.horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
+    self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
+    self.background = pygame.image.load('sprites/background1.png')
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
     self.x = 5
     self.y = 0 
@@ -66,8 +66,10 @@ class Map():
 
   def draw_map(self, screen, x, y, born): 
     square_size = 60 # Tamanho do quadrado
-    height_square_size = 4 # Tamanho do quadrado
-
+    height_square_size = 10 # Tamanho do quadrado
+    screen.blit(self.background, (self.x, self.y))
+    self.horizontal_walls = pygame.transform.scale(self.horizontal_walls, (height_square_size, square_size))
+    self.vertical_walls = pygame.transform.scale(self.vertical_walls, (square_size, height_square_size))
     for row in range(self.size_map):
       for column in range(self.size_map):
         items = list(self.matriz_game[row][column]) # vai ser os simbolos de um elemento da matriz, por exemplo <^Sy
@@ -85,12 +87,13 @@ class Map():
               item_y += 60
 
             if item == "<" or item == ">":
+              screen.blit(self.horizontal_walls, (item_x, item_y))  
               rect = pygame.Rect(item_x, item_y, height_square_size, square_size)
             elif item == "^" or item == "v":
               rect = pygame.Rect(item_x, item_y, square_size, height_square_size)
-            
+              screen.blit(self.vertical_walls, (item_x, item_y))
             self.walls_rects.append(rect)
-            pygame.draw.rect(screen, (255,255,255), rect)
+
 
           if item in self.symbols_collectibles.keys():
             item_x += 22
