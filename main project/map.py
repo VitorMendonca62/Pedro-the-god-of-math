@@ -149,5 +149,3 @@ class Map():
     self.analyze_collision(player)
     self.move_map()
     self.draw_map(self.screen, self.x, self.y, False)
-
-
