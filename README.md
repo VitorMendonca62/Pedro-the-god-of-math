@@ -49,7 +49,9 @@ Por fim, toda a experiência de construir o sistema interativo, tanto os momento
 
 ## Galeria de imagens do Pedro: The God of Math
 
-PREENCHER AINDA
+<img src="main project/assets/main_menu.png">
+<img src="main project/assets/in-game.png">
+<img src="main project/assets/in-game2.png">
 
 ## Link para repositório git ou equivalente; ou link para baixar o código fonte
 
