@@ -6,34 +6,11 @@ from level import *
 from colors import *
 from player import *
 from collectibles import *
+from score import *
 
 width = 900
 height = 600
 screen = pygame.display.set_mode((width,height))
-
-def desenhar_texto(texto, tamanho, cor, x, y):
-    fonte = pygame.font.Font(None, tamanho)
-    texto = fonte.render(texto, True, cor)
-    screen.blit(texto, (x, y))
-
-def show_collection(map):
-  pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
-
-  dif = 130
-  ini_symbol = 450-(dif*2)
-  ini_text = ini_symbol + 25
-
-  screen.blit(Collectible.naturals,(ini_symbol, height-27,20,20))
-  desenhar_texto(f"({map.collected['N']}/{map.symbols_collectibles['N']})",30,white,ini_text,height-27)
-  
-  screen.blit(Collectible.integers,(ini_symbol + dif,height-27,20,20))
-  desenhar_texto(f"({map.collected['Z']}/{map.symbols_collectibles['Z']})",30,white,ini_text+dif*1,height-27)
-  
-  screen.blit(Collectible.racionals,(ini_symbol + dif*2,height-27,20,20))
-  desenhar_texto(f"({map.collected['Q']}/{map.symbols_collectibles['Q']})",30,white,ini_text+dif*2,height-27)
-  
-  screen.blit(Collectible.reals,(ini_symbol + dif*3,height-27,20,20))
-  desenhar_texto(f"({map.collected['R']}/{map.symbols_collectibles['R']})",30,white,ini_text+dif*3,height-27)
 
 def main_game():
   pygame.init()
@@ -68,7 +45,7 @@ def main_game():
     all_sprites.draw(screen)
     
     #desenhando o placar
-    show_collection(map)
+    show_score(map)
 
     clock.tick(30)
     pygame.display.update()
