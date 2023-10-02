@@ -21,11 +21,11 @@ class Map():
     self.background = pygame.image.load('sprites/background1.png')
 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
-    self.x = 0
-    self.y = 0 
+    self.x = - 15
+    self.y = -570
     # Ultimo valor de x e y  que foi atribuiddo
-    self.last_x = 0 
-    self.last_y = 0
+    self.last_x = self.x 
+    self.last_y = self.y
     self.size_map = 15 # tamanho do mapa
 
     # Esse dicionário que vai mostrar quanto foi coletado de cada um:

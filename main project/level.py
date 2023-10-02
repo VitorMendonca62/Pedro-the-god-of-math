@@ -1,9 +1,9 @@
 import cv2
-
+from random import randint
 class Level:
   def __init__(self):
     self.size = 15 # Tamanho da matriz  
-    maze_number = 1
+    maze_number = randint(1,4)
     self.level_photo = cv2.imread(f"./assets/levels/0/maze{maze_number}.png") # Pega uma estrutura de mapa aleatorio a partir do nivel
     self.matriz = list()
 
