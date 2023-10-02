@@ -1,6 +1,7 @@
 import pygame
 from sys import exit 
 from button import Button
+from main import main_game
 
 pygame.init()
 
@@ -11,10 +12,10 @@ WIDTH = 900
 HEIGHT = 600 
 
 # Música e efeitos sonoros 
-pygame.mixer.music.load('../assets/sounds/Soundtrack_menu.mp3') # Música de Background 
+pygame.mixer.music.load('./assets/sounds/Soundtrack_menu.mp3') # Música de Background 
 pygame.mixer.music.play(-1) # O -1 foi colcoado para estar em loop 
 
-CLICK_SOUND = pygame.mixer.Sound('../assets/sounds/clicked_sound.mp3') # Efeito sonoro de click
+CLICK_SOUND = pygame.mixer.Sound('./assets/sounds/clicked_sound.mp3') # Efeito sonoro de click
 
 # Definição do tamanho da tela e definição do background
 screen = pygame.display.set_mode((WIDTH,HEIGHT)) # Cria uma tela e determina o seu tamanho
@@ -23,7 +24,7 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT)) # Cria uma tela e determina o s
 relogio = pygame.time.Clock()
 
 # Fonte 
-font_path = '../assets/font\Pixeled.otf'
+font_path = './assets/font\Pixeled.otf'
 font = pygame.font.Font(font_path, 30)
 
 def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Função para escrever texto na tela 
@@ -33,19 +34,19 @@ def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Funç
 
 def instructions_screen(): # A tela de instruções
     # Imagem de Background
-    instructions_screen_bg = pygame.image.load('../assets\images\help_screen.png')
+    instructions_screen_bg = pygame.image.load('./assets\images\help_screen.png')
     instructions_screen_bg = pygame.transform.scale(instructions_screen_bg,(WIDTH,HEIGHT))
     
-    pygame.display.set_caption("Pedro: God of the Math") # Coloca o nome do jogo
+    pygame.display.set_caption("Pedro: The God of Math") # Coloca o nome do jogo
     # Título e Ícone
-    icon = pygame.image.load('../assets\images\icon.png')
+    icon = pygame.image.load('./assets\images\icon.png')
     pygame.display.set_icon(icon)
 
     while True:
         screen.blit(instructions_screen_bg, (0,0))
         mouse_pos = pygame.mouse.get_pos()
         # Imagem do botão (e a sua conversão para o tamanho ideal)
-        BUTTON_IMAGE = pygame.image.load("../assets\images\exit_icon.png")
+        BUTTON_IMAGE = pygame.image.load("./assets\images\exit_icon.png")
         BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (30, 30))
 
         QUIT_BUTTON = Button(BUTTON_IMAGE, 690, 127, font, "")
@@ -82,22 +83,22 @@ def main_menu():
     global muted
     
     # Declarando a imagem de background do main_menu
-    bg_img = pygame.image.load('../assets/images/main_background.png')
+    bg_img = pygame.image.load('./assets/images/main_background.png')
     bg_img = pygame.transform.scale(bg_img,(WIDTH,HEIGHT))
     
     # Título e Ícone
-    pygame.display.set_caption("Pedro: God of the Math") # Coloca o nome do jogo
-    icon = pygame.image.load('../assets\images\icon.png')
+    pygame.display.set_caption("Pedro: The God of Math") # Coloca o nome do jogo
+    icon = pygame.image.load('./assets\images\icon.png')
     pygame.display.set_icon(icon)
     
     # Imagem do botão 
-    button_image_path = "../assets\images\start_button.png"
+    button_image_path = "./assets\images\start_button.png"
     
     # Modificar o ícone se a música encontra-se mutada ou desmutada. 
     if muted: 
-        button_image_music_path = "../assets\images\muted_music_icon.png"
+        button_image_music_path = "./assets\images\muted_music_icon.png"
     else:
-        button_image_music_path = "../assets\images\music_icon.png"
+        button_image_music_path = "./assets\images\music_icon.png"
     
     while True:
         screen.blit(bg_img, (0,0))
@@ -137,6 +138,9 @@ def main_menu():
                 if START_BUTTON.clicked(mouse_pos):
                     pygame.mixer.Sound.play(CLICK_SOUND)
                     print("Clicado")
+                    pygame.mixer.music.load('./assets/sounds/Soundtrack_menu.mp3') # Música de Background 
+                    pygame.mixer.music.play(-1) # O -1 foi colcoado para estar em loop 
+                    main_game()
                 if INSTRUCTIONS_BUTTON.clicked(mouse_pos):
                     pygame.mixer.Sound.play(CLICK_SOUND)
                     instructions_screen()
@@ -145,11 +149,11 @@ def main_menu():
                     
                     if muted == False:  
                         muted = True
-                        button_image_music_path = "../assets\images\muted_music_icon.png"
+                        button_image_music_path = "./assets\images\muted_music_icon.png"
                         pygame.mixer.music.pause()
                     else: # muted == True
                         muted = False
-                        button_image_music_path = "../assets\images\music_icon.png"
+                        button_image_music_path = "./assets\images\music_icon.png"
                         pygame.mixer.music.unpause()
         relogio.tick(60)
         pygame.display.update()
