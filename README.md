@@ -76,6 +76,4 @@ Por fim, toda a experiência de construir o sistema interativo, tanto os momento
 <img src="main project/assets/in-game.png">
 <img src="main project/assets/in-game2.png">
 
-## Link para repositório git/link para baixar o código fonte:
 
-PREENCHER AINDA
