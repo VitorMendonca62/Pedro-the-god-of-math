@@ -24,7 +24,7 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT)) # Cria uma tela e determina o s
 relogio = pygame.time.Clock()
 
 # Fonte 
-font_path = './assets/font\Pixeled.otf'
+font_path = './assets/font\BirchLeaf.otf'
 font = pygame.font.Font(font_path, 30)
 
 def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Função para escrever texto na tela 
@@ -54,15 +54,13 @@ def instructions_screen(): # A tela de instruções
         QUIT_BUTTON.update(screen)
 
         # Conteúdo escrito da parte de instruções       
-        STRING_LIST = ["O objetivo do jogo e passar pelo labirinto co-", "letando os itens dispostos no mapa. Para jo-,", "gar utilize as teclas WASD para movimentar", "o personagem. O quantidade coletada sera", "mostrada na tela. Divirta-se! :)"] 
+        STRING_LIST = [" O jogo tem como objetivo passar pelo", " labirinto coletando todos os conjuntos", " numericos no mapa. Utilize as teclas", " W A S D para mover o personagem.", "A quantidade coletada sera mostrada", "  na tela. Divirta-se e seja preciso! :)"] 
         
         # Posição inicial da escrita (será usada como referência para determinar as próximas linhas)
         initial_x = 200
-        initial_y = 170
+        initial_y = 215
  
-        write_text("INSTRUCOES", font_path, (0,0,0), 200, 110, 50)
-
-        # Loop criado para printar cada string para simular a quebra de linha
+             # Loop criado para printar cada string para simular a quebra de linha
         for line in STRING_LIST:
             write_text(line, font_path, (0,0,0), initial_x, initial_y, 30)
             initial_y += 30
@@ -114,11 +112,11 @@ def main_menu():
         BUTTON_IMAGE_MUSIC = pygame.transform.scale(BUTTON_IMAGE_MUSIC, (41, 41))
 
         # Botão de iniciar o jogo
-        START_BUTTON = Button(BUTTON_IMAGE, 250, 500, font, "INICIAR")
+        START_BUTTON = Button(BUTTON_IMAGE, 250, 500, font, "Iniciar")
         buttons_list.append(START_BUTTON)
         
         # Botão de fechar o jogo
-        INSTRUCTIONS_BUTTON = Button(BUTTON_IMAGE, 650, 500, font, "INSTRUCOES")
+        INSTRUCTIONS_BUTTON = Button(BUTTON_IMAGE, 650, 500, font, "Instrucoes")
         buttons_list.append(INSTRUCTIONS_BUTTON)
 
         # Botão de mutar a música
