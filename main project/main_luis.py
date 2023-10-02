@@ -137,8 +137,9 @@ def main_menu():
                 if START_BUTTON.clicked(mouse_pos):
                     pygame.mixer.Sound.play(CLICK_SOUND)
                     print("Clicado")
-                    pygame.mixer.music.load('./assets/sounds/game_soundtrack.mp3') # Música de Background 
-                    pygame.mixer.music.play(-1) # O -1 foi colcoado para estar em loop 
+                    if not muted:
+                        pygame.mixer.music.load('./assets/sounds/game_soundtrack.mp3') # Música de Background 
+                        pygame.mixer.music.play(-1) # O -1 foi colcoado para estar em loop 
                     main_game()
                 if INSTRUCTIONS_BUTTON.clicked(mouse_pos):
                     pygame.mixer.Sound.play(CLICK_SOUND)
