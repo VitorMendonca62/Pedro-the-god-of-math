@@ -11,29 +11,26 @@ width = 900
 height = 600
 screen = pygame.display.set_mode((width,height))
 
-def desenhar_texto(texto, tamanho, cor, x, y):
-    fonte = pygame.font.Font(None, tamanho)
-    texto = fonte.render(texto, True, cor)
-    screen.blit(texto, (x, y))
+dif = 130
+ini_symbol = 450-(dif*2)
+ini_text = ini_symbol + 25
+
+def draw_text(text, size, color, x, y):
+  font = pygame.font.Font(None, size)
+  text = font.render(text, True, color)
+  screen.blit(text, (x, y))
+  
+def colle_sub(map,symbol,index,name):
+  screen.blit(name,(ini_symbol + dif*index, height-27,20,20))
+  draw_text(f"({map.collected[symbol]}/{map.symbols_collectibles[symbol]})",30,white,ini_text+dif*index,height-27)
 
 def show_collection(map):
   pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
 
-  dif = 130
-  ini_symbol = 450-(dif*2)
-  ini_text = ini_symbol + 25
-
-  screen.blit(Collectible.naturals,(ini_symbol, height-27,20,20))
-  desenhar_texto(f"({map.collected['N']}/{map.symbols_collectibles['N']})",30,white,ini_text,height-27)
-  
-  screen.blit(Collectible.integers,(ini_symbol + dif,height-27,20,20))
-  desenhar_texto(f"({map.collected['Z']}/{map.symbols_collectibles['Z']})",30,white,ini_text+dif*1,height-27)
-  
-  screen.blit(Collectible.racionals,(ini_symbol + dif*2,height-27,20,20))
-  desenhar_texto(f"({map.collected['Q']}/{map.symbols_collectibles['Q']})",30,white,ini_text+dif*2,height-27)
-  
-  screen.blit(Collectible.reals,(ini_symbol + dif*3,height-27,20,20))
-  desenhar_texto(f"({map.collected['R']}/{map.symbols_collectibles['R']})",30,white,ini_text+dif*3,height-27)
+  colle_sub(map,'N',0,Collectible.naturals)
+  colle_sub(map,'Z',1,Collectible.integers)
+  colle_sub(map,'Q',2,Collectible.racionals)
+  colle_sub(map,'R',3,Collectible.reals)
 
 def main_game():
   pygame.init()
