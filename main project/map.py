@@ -161,5 +161,4 @@ class Map():
     self.move_map()
     self.draw_map(self.screen, self.x, self.y, False)
 
-# TO-do:
-# Fazer uma missao para passar de level
+

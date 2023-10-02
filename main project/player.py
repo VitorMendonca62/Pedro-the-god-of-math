@@ -4,7 +4,7 @@ from pygame.locals import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.sprites = []
+        self.sprites = [] #Lista para armazenar todas as sprites do personagem
         self.sprites.append(pygame.image.load('sprites/player_stopped.png'))
         self.sprites.append(pygame.image.load('sprites/player_stopped_up.png'))
         self.sprites.append(pygame.image.load('sprites/player_walking_up1.png'))
@@ -28,8 +28,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = 430, 264 
 
-
-    def baixo(self, x, y):
+    #Funções para definir as modificações de sprite de acordo com o movimento desejado
+    def baixo(self, x, y): 
         self.image = self.sprites[int(self.current_down)]
         self.current_down += 0.25       
         if self.current_down > 12.2:
@@ -61,6 +61,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = x, y 
         self.image = pygame.transform.scale(self.image, (12*2-3, 21*2-6))           
 
+#Função para aplicar as atualizações dos movimentos do personagem
 def player_movement(player):
     keys = pygame.key.get_pressed()
     if keys[K_w] or keys[K_s]:
