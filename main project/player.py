@@ -4,7 +4,7 @@ from pygame.locals import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.sprites = []
+        self.sprites = [] #Lista para armazenar todas as sprites do personagem
         self.sprites.append(pygame.image.load('sprites/player_stopped.png'))
         self.sprites.append(pygame.image.load('sprites/player_stopped_up.png'))
         self.sprites.append(pygame.image.load('sprites/player_walking_up1.png'))
@@ -24,18 +24,18 @@ class Player(pygame.sprite.Sprite):
         self.current_left = 7
         self.current_down = 10
         self.image = self.sprites[self.current_sprite]
-        self.image = pygame.transform.scale(self.image, (12*2, 21*2))
+        self.image = pygame.transform.scale(self.image, (12*2-3, 21*2-6))
         self.rect = self.image.get_rect()
-        self.rect.topleft = 307, 298
+        self.rect.topleft = 430, 264 
 
-
-    def baixo(self, x, y):
+    #Funções para definir as modificações de sprite de acordo com o movimento desejado
+    def baixo(self, x, y): 
         self.image = self.sprites[int(self.current_down)]
         self.current_down += 0.25       
         if self.current_down > 12.2:
             self.current_down = 10
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (12*2, 21*2)) 
+        self.image = pygame.transform.scale(self.image, (12*2-3, 21*2-6)) 
 
     def cima(self, x, y):
         self.image = self.sprites[int(self.current_up)]
@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_up >= 4:
             self.current_up = 1
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (12*2, 21*2))  
+        self.image = pygame.transform.scale(self.image, (12*2-3, 21*2-6))  
 
     def direita(self, x, y):
         self.image = self.sprites[int(self.current_right)] 
@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_right >= 7:
             self.current_right = 4
         self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (12*2, 21*2))  
+        self.image = pygame.transform.scale(self.image, (12*2-2, 21*2-4))  
 
     def esquerda(self, x, y):
         self.image = self.sprites[int(self.current_left)]   
@@ -59,18 +59,19 @@ class Player(pygame.sprite.Sprite):
         if self.current_left >= 10:
             self.current_left = 7
         self.rect.topleft = x, y 
-        self.image = pygame.transform.scale(self.image, (12*2, 21*2))           
+        self.image = pygame.transform.scale(self.image, (12*2-3, 21*2-6))           
 
+#Função para aplicar as atualizações dos movimentos do personagem
 def player_movement(player):
     keys = pygame.key.get_pressed()
     if keys[K_w] or keys[K_s]:
         if keys[K_w]:
-            player.cima(307, 298)
+            player.cima(430, 264)
         if keys[K_s]:
-            player.baixo(307, 298)
+            player.baixo(430, 264)
 
     if keys[K_a] or keys[K_d]:
         if keys[K_a]:
-            player.esquerda(307, 298)
+            player.esquerda(430, 264)
         if keys[K_d]:
-            player.direita(307, 298)
+            player.direita(430, 264)

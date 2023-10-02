@@ -19,7 +19,7 @@ class Map():
     self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
     self.background = pygame.image.load('sprites/background1.png')
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
-    self.x = 5
+    self.x = 0
     self.y = 0 
     # Ultimo valor de x e y  que foi atribuiddo
     self.last_x = 0 
@@ -61,6 +61,7 @@ class Map():
 
           if collectible.adress not in self.colle_adresses: # se o endereço não foi usado
             search_adress = False
+            self.colle_adresses.append(collectible.adress)
         
         self.collectibles.append(collectible)
         self.matriz_game[collectible.row][collectible.column] += symbol
@@ -160,5 +161,4 @@ class Map():
     self.move_map()
     self.draw_map(self.screen, self.x, self.y, False)
 
-# TO-do:
-# Fazer uma missao para passar de level
+
