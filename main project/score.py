@@ -1,30 +1,46 @@
 from collectibles import *
 from colors import *
 
-width = 900
-height = 600
-screen = pygame.display.set_mode((width,height))
-
-dif = 130
-ini_symbol = 470-(dif*2)
-ini_text = ini_symbol + 25
-score_bar = pygame.image.load('assets/images/start_button.png')
-score_bar = pygame.transform.scale(score_bar, (width,65))
 
 
-def draw_text(text, size, color, x, y):
-    font = pygame.font.Font(None, size)
-    text = font.render(text, True, color)
-    screen.blit(text, (x, y))
+def show_score(screen, map):
+    height = screen.get_height()
+    width = screen.get_width()
+    
+    score_bar = pygame.image.load('assets/images/start_button.png')
+    score_bar = pygame.transform.scale(score_bar, (width,65))
 
-def colle_sub(map,symbol,index,name):
-    screen.blit(name,(ini_symbol + dif*index, height-52,20,20))
-    draw_text(f"({map.collected[symbol]}/{map.symbols_collectibles[symbol]})",30,black,ini_text+dif*index,height-50)
+    def draw_text(text, size, color, x, y):
+        font = pygame.font.Font(None, size)
+        text = font.render(text, True, color)
+        screen.blit(text, (x, y))
 
-def show_score(map):
-    #pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
+    def draw_collectible(symbol, index, name):
+        between_collectibles = 130
+        collectible_x_left = (width / 2) - (between_collectibles * 2)
+        text_x_left = collectible_x_left + 30
+        position = between_collectibles * index
+
+        size = 20
+        collectible_x = collectible_x_left + position
+        collectible_y = height - 52
+        screen.blit(name, (collectible_x, collectible_y, size, size))
+        
+        total_collectible = symbols_collectibles[symbol]
+        collectible_collected = map.collected[symbol] 
+        
+        string_text = f"({collectible_collected}/{total_collectible})"
+
+        text_x = text_x_left + position
+        text_y = height - 50
+        draw_text(string_text, 30, white, text_x, text_y)
+
+    position = (height - 40, width)
     screen.blit(score_bar, (0,height-70))
-    colle_sub(map,'N',0,Collectible.naturals)
-    colle_sub(map,'Z',1,Collectible.integers)
-    colle_sub(map,'Q',2,Collectible.racionals)
-    colle_sub(map,'R',3,Collectible.reals)
+
+    draw_collectible('N', 0, Collectible.naturals)
+    draw_collectible('Z', 1, Collectible.integers)
+    draw_collectible('Q', 2, Collectible.racionals)
+    draw_collectible('R', 3, Collectible.reals)
+
+

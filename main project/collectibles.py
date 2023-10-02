@@ -1,9 +1,13 @@
 import pygame
-import random
+from random import choice, randint
 
-# Para escolher a quantidade de coletáveis, vá em map
-# Modifique os números no dicionário symbols_collectibles
-
+symbols_collectibles = {
+  "N": randint(1,3),
+  "Z": randint(3,5),
+  "Q": randint(2,4),
+  "R": randint(1,3)
+  }
+  
 class Collectible():
   size = 250/11
   naturals = pygame.image.load('sprites/naturals.png')
@@ -35,7 +39,7 @@ class Collectible():
       self.sets = Collectible.reals
       self.name = "Reals"
 
-    self.row = random.choice(range(0,14))
-    self.column = random.choice(range(0,14))
+    self.row = choice(range(0,14))
+    self.column = choice(range(0,14))
 
     self.adress = (self.row,self.column)
