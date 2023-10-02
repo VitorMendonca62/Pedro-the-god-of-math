@@ -60,10 +60,7 @@ class Player(pygame.sprite.Sprite):
             self.current_left = 7
         self.rect.topleft = x, y 
         self.image = pygame.transform.scale(self.image, (12*2, 21*2))           
-    def parado(self, x, y):
-        self.image = self.sprites[0]
-        self.rect.topleft = x, y
-        self.image = pygame.transform.scale(self.image, (13*2, 22*2))
+
 def player_movement(player):
     keys = pygame.key.get_pressed()
     if keys[K_w] or keys[K_s]:
