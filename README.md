@@ -38,7 +38,7 @@ python main.py
 
 [Luiz Veloso (lmvs)](https://github.com/luizzmg) - Funcionamento dos coletáveis e organização do código. 
 
-[Mateus Guerra (msg11)](https://github.com/mateussguerra) - Movimentação e sprites do personagem. 
+[Mateus Guerra (msg11)](https://github.com/mateussguerra) - Movimentação e colisão dos personagem e sprites em geral 
 
 [Talisson Mendes (tsms)](https://github.com/talissonmendes) - Criação das telas iniciais e conceitos lógicos do mapa. 
 
