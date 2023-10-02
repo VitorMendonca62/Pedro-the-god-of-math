@@ -61,7 +61,7 @@ def instructions_screen(): # A tela de instruções
         initial_x = 200
         initial_y = 215
  
-             # Loop criado para printar cada string para simular a quebra de linha
+        # Loop criado para printar cada string para simular a quebra de linha
         for line in STRING_LIST:
             write_text(line, font_path, (0,0,0), initial_x, initial_y, 30)
             initial_y += 30

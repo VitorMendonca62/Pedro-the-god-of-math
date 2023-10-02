@@ -1,5 +1,7 @@
 from collectibles import *
 from colors import *
+from button import Button
+
 
 
 
@@ -43,4 +45,45 @@ def show_score(screen, map):
     draw_collectible('Q', 2, Collectible.racionals)
     draw_collectible('R', 3, Collectible.reals)
 
+def victory_screen(screen):
+    # Imagem de Background
+    WIDTH = screen.get_width()
+    HEIGHT = screen.get_height()
+    
+    victory_bg = pygame.image.load('./assets/images/final_screen.png')
+    victory_bg = pygame.transform.scale(victory_bg,(WIDTH,HEIGHT))
+    
+    pygame.display.set_caption("Pedro: The God of Math") # Coloca o nome do jogo
+    # Título e Ícone
+    icon = pygame.image.load('./assets/images/icon.png')
+    pygame.display.set_icon(icon)
+    
+    def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Função para escrever texto na tela 
+        font = pygame.font.Font(font_path, font_size)
+        text = font.render(text_content, True, color)
+        screen.blit(text, (pos_x, pos_y))
 
+    font_path = './assets/font/Pixeled.otf'
+    # Conteúdo escrito da parte de instruções       
+    STRING_LIST = ["Parabéns por coletar todos os coletáveis.", " Pedro está muito orgulhoso que você conseguiu :)"] 
+        
+    # Posição inicial da escrita (será usada como referência para determinar as próximas linhas)
+    initial_x = 200
+    initial_y = 215
+ 
+    # Loop criado para printar cada string para simular a quebra de linha
+    for line in STRING_LIST:
+        print("estou aqui")
+        write_text(line, font_path, (0,0,0), initial_x, initial_y, 30)
+        initial_y += 30
+    
+    while True:
+        screen.blit(victory_bg, (0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            
+        pygame.display.update()
+        
+        

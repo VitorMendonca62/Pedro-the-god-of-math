@@ -123,12 +123,12 @@ class Map():
   
   
   def analyze_collision(self,player):
-    for wall in self.walls_rects:
-      if player.rect.colliderect(wall):
-        self.x = self.last_x
-        self.y = self.last_y
-        self.pace = 0
-        self.walls_rects = list()
+    # for wall in self.walls_rects:
+    #   if player.rect.colliderect(wall):
+    #     self.x = self.last_x
+    #     self.y = self.last_y
+    #     self.pace = 0
+    #     self.walls_rects = list()
 
     for collectible in self.collectibles:
       if collectible.rect.colliderect(player) and not collectible.collected:
@@ -140,7 +140,11 @@ class Map():
         condition_victory = analyze_victory(self.collected)
         if condition_victory:
           print("Terminastes")
-  
+          pygame.mixer.music.pause()
+          pygame.mixer.Sound.play(pygame.mixer.Sound('./assets/sounds/victory_sound.mp3'))
+          victory_screen(self.screen)
+          
+          
   def update(self,player):
     self.analyze_collision(player)
     self.move_map()

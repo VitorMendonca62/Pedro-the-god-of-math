@@ -8,11 +8,10 @@ width = 900
 height = 600
 screen = pygame.display.set_mode((width,height))
 
+
 def game():
   pygame.init()
-
   game_running = True
-
   screen = pygame.display.set_mode((width,height))
   pygame.display.set_caption("Pedro: The God of Math")
   clock = pygame.time.Clock()
