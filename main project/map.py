@@ -19,7 +19,7 @@ class Map():
     self.horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
     self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
     self.background = pygame.image.load('sprites/background1.png')
-    self.background = pygame.transform.scale(self.background, (1500, 1500))
+    self.background = pygame.transform.scale(self.background, (1800, 1500))
 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
     self.x = 0
@@ -56,7 +56,7 @@ class Map():
     square_size = 60 # Tamanho do quadrado
     height_square_size = 10 # Tamanho do quadrado
     
-    screen.blit(self.background, (self.x - 450, self.y - 300))
+    screen.blit(self.background, (self.x-450, self.y-300))
 
     self.horizontal_walls = pygame.transform.scale(self.horizontal_walls, (height_square_size, square_size))
     self.vertical_walls = pygame.transform.scale(self.vertical_walls, (square_size, height_square_size))
