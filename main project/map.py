@@ -28,7 +28,7 @@ class Map():
     self.colle_adresses = list()
 
     # Escolha a quantidade de cada coletável:
-    self.symbols_collectibles = {"r":1,"g":5,"b":3,"y":2}
+    self.symbols_collectibles = {"N":1,"Z":5,"Q":3,"R":2}
 
     # Me prevenindo caso você tenha escolhido uma quantidade muito grande
     total_collectibles = 0
@@ -45,7 +45,7 @@ class Map():
       self.works = True
 
     # Esse dicionário que vai mostrar quanto foi coletado de cada um:
-    self.collected = {"r":0,"g":0,"b":0,"y":0}
+    self.collected = {"N":0,"Z":0,"Q":0,"R":0}
 
     level = Level()
     self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
@@ -103,8 +103,8 @@ class Map():
 
             for collectible in self.collectibles:
               if collectible.row == row and collectible.column == column:
-                collectible.rect = pygame.Rect(item_x, item_y, size, size)
-                pygame.draw.rect(screen, collectible.color, collectible.rect)
+                collectible.rect = pygame.Rect(item_x, item_y, size, size)               
+                screen.blit(collectible.sets, (item_x, item_y))
             
           if item == "S" and born:
             self.x = - square_size * (column) + square_size * 4 
