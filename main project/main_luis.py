@@ -12,6 +12,7 @@ WIDTH = 900
 HEIGHT = 600 
 
 # Música e efeitos sonoros 
+pygame.mixer.music.set_volume(0.3)
 pygame.mixer.music.load('./assets/sounds/Soundtrack_menu.mp3') # Música de Background 
 pygame.mixer.music.play(-1) # O -1 foi colcoado para estar em loop 
 

@@ -18,8 +18,8 @@ def draw_text(text, size, color, x, y):
     screen.blit(text, (x, y))
 
 def colle_sub(map,symbol,index,name):
-    screen.blit(name,(ini_symbol + dif*index, height-50,20,20))
-    draw_text(f"({map.collected[symbol]}/{map.symbols_collectibles[symbol]})",30,white,ini_text+dif*index,height-50)
+    screen.blit(name,(ini_symbol + dif*index, height-52,20,20))
+    draw_text(f"({map.collected[symbol]}/{map.symbols_collectibles[symbol]})",30,black,ini_text+dif*index,height-50)
 
 def show_score(map):
     #pygame.draw.rect(screen,(120,120,120),(0,height-40,width,40))
