@@ -6,7 +6,31 @@ O jogo "Pedro: The God of Math" foi desenvolvido inteiramente com a utilização
 
 ## Motivações e funcionalidades:
 
-O nome do jogo é uma homenagem ao nosso professor das disciplinas de Cálculo 1 e Matemática Discreta Pedro Manhães, atribuindo a ele o nome figurativo de Deus da matemática. A motivação do projeto é também fazer do usuário um Deus da matemática, enquanto o mesmo é desafiado pelo labirinto a coletar 4 diferentes conjuntos numéricos (Naturais, Inteiros, Racionais e Reais) e absorver tais conhecimentos que irão possibilitar o mérito divino. O movimento do jogador é controlado através das teclas W (para cima), A (para esquerda), S (para baixo) e D (para esquerda). Para a execução do código, é necessário o Python e pygame instalados, além do download zip da branch main desse repositório para enfim executar o arquivo main.py.
+O nome do jogo é uma homenagem ao nosso professor das disciplinas de Cálculo 1 e Matemática Discreta Pedro Manhães, atribuindo a ele o nome figurativo de Deus da matemática. A motivação do projeto é também fazer do usuário um Deus da matemática, enquanto o mesmo é desafiado pelo labirinto a coletar 4 diferentes conjuntos numéricos (Naturais, Inteiros, Racionais e Reais) e absorver tais conhecimentos que irão possibilitar o mérito divino. O movimento do jogador é controlado através das teclas W (para cima), A (para esquerda), S (para baixo) e D (para esquerda).
+
+Para a execução do código, é necessário:
+
+1. Ter o python instalado em sua máquina
+
+2. Instalar as dependências
+2.1 pygame:
+```bash
+pip install pygame
+``
+2.2 opencv
+``bash
+pip install opencv_python
+```
+
+3. Entre na pasta main project
+``bash
+cd main project
+``
+
+4. Inicie o jogo
+``bash
+python main.py
+``
 
 ## Integrantes do projeto e suas responsabilidades:
 
