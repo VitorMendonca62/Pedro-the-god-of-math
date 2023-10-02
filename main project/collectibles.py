@@ -7,7 +7,17 @@ symbols_collectibles = {
   "Q": randint(2,4),
   "R": randint(1,3)
   }
+
+def analyze_victory(collected_dict): # collected_dict refere-se ao dicionário dos coletáveis coletados e o collectibles refere-se ao dicionários da quantidade de coletáveis
+  count = 0
+  for key in symbols_collectibles.keys():
+    collected = collected_dict[key]
+    collectible = symbols_collectibles[key]
+    if collected == collectible:
+      count += 1 
   
+  return count == len(symbols_collectibles)
+
 class Collectible():
   size = 250/11
   naturals = pygame.image.load('sprites/naturals.png')
