@@ -24,7 +24,7 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT)) # Cria uma tela e determina o s
 relogio = pygame.time.Clock()
 
 # Fonte 
-font_path = './assets/font\BirchLeaf.otf'
+font_path = './assets/font/Pixeled.otf'
 font = pygame.font.Font(font_path, 30)
 
 def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Função para escrever texto na tela 
@@ -34,19 +34,19 @@ def write_text(text_content, font_path, color, pos_x, pos_y, font_size): # Funç
 
 def instructions_screen(): # A tela de instruções
     # Imagem de Background
-    instructions_screen_bg = pygame.image.load('./assets\images\help_screen.png')
+    instructions_screen_bg = pygame.image.load('./assets/images/help_screen.png')
     instructions_screen_bg = pygame.transform.scale(instructions_screen_bg,(WIDTH,HEIGHT))
     
     pygame.display.set_caption("Pedro: The God of Math") # Coloca o nome do jogo
     # Título e Ícone
-    icon = pygame.image.load('./assets\images\icon.png')
+    icon = pygame.image.load('./assets/images/icon.png')
     pygame.display.set_icon(icon)
 
     while True:
         screen.blit(instructions_screen_bg, (0,0))
         mouse_pos = pygame.mouse.get_pos()
         # Imagem do botão (e a sua conversão para o tamanho ideal)
-        BUTTON_IMAGE = pygame.image.load("./assets\images\exit_icon.png")
+        BUTTON_IMAGE = pygame.image.load("./assets/images/exit_icon.png")
         BUTTON_IMAGE = pygame.transform.scale(BUTTON_IMAGE, (30, 30))
 
         QUIT_BUTTON = Button(BUTTON_IMAGE, 690, 127, font, "")
@@ -85,17 +85,17 @@ def main_menu():
     
     # Título e Ícone
     pygame.display.set_caption("Pedro: The God of Math") # Coloca o nome do jogo
-    icon = pygame.image.load('./assets\images\icon.png')
+    icon = pygame.image.load('./assets/images/icon.png')
     pygame.display.set_icon(icon)
     
     # Imagem do botão 
-    button_image_path = "./assets\images\start_button.png"
+    button_image_path = "./assets/images/start_button.png"
     
     # Modificar o ícone se a música encontra-se mutada ou desmutada. 
     if muted: 
-        button_image_music_path = "./assets\images\muted_music_icon.png"
+        button_image_music_path = "./assets/images/muted_music_icon.png"
     else:
-        button_image_music_path = "./assets\images\music_icon.png"
+        button_image_music_path = "./assets/images/music_icon.png"
     
     while True:
         screen.blit(bg_img, (0,0))
@@ -147,11 +147,11 @@ def main_menu():
                     
                     if muted == False:  
                         muted = True
-                        button_image_music_path = "./assets\images\muted_music_icon.png"
+                        button_image_music_path = "./assets/images/muted_music_icon.png"
                         pygame.mixer.music.pause()
                     else: # muted == True
                         muted = False
-                        button_image_music_path = "./assets\images\music_icon.png"
+                        button_image_music_path = "./assets/images/music_icon.png"
                         pygame.mixer.music.unpause()
         relogio.tick(60)
         pygame.display.update()
