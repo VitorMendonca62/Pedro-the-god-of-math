@@ -19,7 +19,7 @@ def analyze_victory(collected_dict): # collected_dict refere-se ao dicionário d
   return count == len(symbols_collectibles)
 
 class Collectible():
-  size = 250/11
+  size = 270/8
   naturals = pygame.image.load('sprites/naturals.png')
   naturals = pygame.transform.scale(naturals, (size, size))
   integers = pygame.image.load('sprites/integer.png')

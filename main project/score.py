@@ -18,12 +18,12 @@ def show_score(screen, map):
     def draw_collectible(symbol, index, name):
         between_collectibles = 130
         collectible_x_left = (width / 2) - (between_collectibles * 2)
-        text_x_left = collectible_x_left + 30
+        text_x_left = collectible_x_left + 40
         position = between_collectibles * index
 
         size = 20
         collectible_x = collectible_x_left + position
-        collectible_y = height - 52
+        collectible_y = height - 55.5
         screen.blit(name, (collectible_x, collectible_y, size, size))
         
         total_collectible = symbols_collectibles[symbol]
