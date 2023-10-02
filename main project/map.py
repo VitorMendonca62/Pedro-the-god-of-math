@@ -123,12 +123,12 @@ class Map():
   
   
   def analyze_collision(self,player):
-    # for wall in self.walls_rects:
-    #   if player.rect.colliderect(wall):
-    #     self.x = self.last_x
-    #     self.y = self.last_y
-    #     self.pace = 0
-    #     self.walls_rects = list()
+    for wall in self.walls_rects:
+       if player.rect.colliderect(wall):
+         self.x = self.last_x
+         self.y = self.last_y
+         self.pace = 0
+         self.walls_rects = list()
 
     for collectible in self.collectibles:
       if collectible.rect.colliderect(player) and not collectible.collected:

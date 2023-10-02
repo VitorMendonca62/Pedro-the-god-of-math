@@ -9,7 +9,7 @@ def show_score(screen, map):
     height = screen.get_height()
     width = screen.get_width()
     
-    score_bar = pygame.image.load('assets/images/start_button.png')
+    score_bar = pygame.image.load('assets/images/perga.png')
     score_bar = pygame.transform.scale(score_bar, (width,65))
 
     def draw_text(text, size, color, x, y):
