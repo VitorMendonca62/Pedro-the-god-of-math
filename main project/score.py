@@ -64,21 +64,22 @@ def victory_screen(screen):
         screen.blit(text, (pos_x, pos_y))
 
     font_path = './assets/font/Pixeled.otf'
-    # Conteúdo escrito da parte de instruções       
-    STRING_LIST = ["Parabéns por coletar todos os coletáveis.", " Pedro está muito orgulhoso que você conseguiu :)"] 
-        
-    # Posição inicial da escrita (será usada como referência para determinar as próximas linhas)
-    initial_x = 200
-    initial_y = 215
- 
-    # Loop criado para printar cada string para simular a quebra de linha
-    for line in STRING_LIST:
-        print("estou aqui")
-        write_text(line, font_path, (0,0,0), initial_x, initial_y, 30)
-        initial_y += 30
+    
     
     while True:
         screen.blit(victory_bg, (0,0))
+        # Conteúdo escrito da parte de instruções       
+        STRING_LIST = ["Parabens por coletar todos os coletaveis.", "Pedro esta muito orgulhoso que voce conseguiu.", "Para jogar novamente, feche e abra o jogo!"] 
+        
+        # Posição inicial da escrita (será usada como referência para determinar as próximas linhas)
+        initial_x = 200
+        initial_y = 215
+ 
+        # Loop criado para printar cada string para simular a quebra de linha
+        for line in STRING_LIST:
+            write_text(line, font_path, (0,0,0), initial_x, initial_y, 30)
+            initial_y += 30
+    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
