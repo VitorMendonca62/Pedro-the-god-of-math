@@ -18,6 +18,7 @@ class Map():
     self.horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
     self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
     self.background = pygame.image.load('sprites/background1.png')
+    self.background = pygame.transform.scale(self.background, (1500, 1500))
 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
     self.x = 0
