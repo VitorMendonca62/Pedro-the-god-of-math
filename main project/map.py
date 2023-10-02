@@ -61,6 +61,7 @@ class Map():
 
           if collectible.adress not in self.colle_adresses: # se o endereço não foi usado
             search_adress = False
+            self.colle_adresses.append(collectible.adress)
         
         self.collectibles.append(collectible)
         self.matriz_game[collectible.row][collectible.column] += symbol
