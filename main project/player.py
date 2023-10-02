@@ -70,7 +70,7 @@ def player_movement(player):
         if keys[K_s]:
             player.baixo(430, 264)
 
-    if keys[K_a] or keys[K_d]:
+    elif keys[K_a] or keys[K_d]:
         if keys[K_a]:
             player.esquerda(430, 264)
         if keys[K_d]:
