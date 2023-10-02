@@ -46,8 +46,7 @@ python main.py
 
 ## Organização do código: 
 
-PREENCHER AINDA
-
+Procuramos organizar o código de forma bastante modular, de modo a tirar proveito da programação orientada a objetos e da separação do códico em diferentes arquivos. Sendo assim, cada arquivo, cada classe, e cada função, são peças que podemos modificar separadamente para que o sistema por completo funcione propriamente.
 
 ## Ferramentas, Bibliotecas e Frameworks utilizados: 
 
