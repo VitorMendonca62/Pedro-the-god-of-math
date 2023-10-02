@@ -12,25 +12,25 @@ Para a execução do código, é necessário:
 
 1. Ter o python instalado em sua máquina
 
-2. Instalar as dependências
-2.1 pygame:
+2. Instalar as dependências:
+  - pygame:
 ```bash
 pip install pygame
-``
-2.2 opencv
-``bash
+```
+  - opencv
+```bash
 pip install opencv_python
 ```
 
 3. Entre na pasta main project
-``bash
-cd main project
-``
+```bash
+cd '.\main project\'
+```
 
 4. Inicie o jogo
-``bash
+```bash
 python main.py
-``
+```
 
 ## Integrantes do projeto e suas responsabilidades:
 
