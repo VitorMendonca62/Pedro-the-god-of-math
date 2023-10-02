@@ -5,6 +5,7 @@ from sys import exit
 from level import *
 from colors import *
 from player import *
+from collectibles import *
 
 def main_game():
   pygame.init()
@@ -57,17 +58,17 @@ def main_game():
     #dist = 170
     #pos = 10
 
-    pygame.draw.rect(screen,red,(10,height-27,20,20))
-    desenhar_texto(f"({map.collected['r']}/{map.symbols_collectibles['r']})",30,white,35,height-27)
+    screen.blit(Collectible.naturals,(10, height-27,20,20))
+    desenhar_texto(f"({map.collected['N']}/{map.symbols_collectibles['N']})",30,white,35,height-27)
     
-    pygame.draw.rect(screen,green,(10+150*1,height-27,20,20))
-    desenhar_texto(f"({map.collected['g']}/{map.symbols_collectibles['g']})",30,white,35+150*1,height-27)
+    screen.blit(Collectible.integers,(10 + 300,height-27,20,20))
+    desenhar_texto(f"({map.collected['Z']}/{map.symbols_collectibles['Z']})",30,white,35+150*1,height-27)
     
-    pygame.draw.rect(screen,blue,(10+150*2,height-27,20,20))
-    desenhar_texto(f"({map.collected['b']}/{map.symbols_collectibles['b']})",30,white,35+150*2,height-27)
+    screen.blit(Collectible.racionals,(10 + 450,height-27,20,20))
+    desenhar_texto(f"({map.collected['Q']}/{map.symbols_collectibles['Q']})",30,white,35+150*2,height-27)
     
-    pygame.draw.rect(screen,yellow,(10+150*3,height-27,20,20))
-    desenhar_texto(f"({map.collected['y']}/{map.symbols_collectibles['y']})",30,white,35+150*3,height-27)
+    screen.blit(Collectible.reals,(10 + 600,height-27,20,20))
+    desenhar_texto(f"({map.collected['R']}/{map.symbols_collectibles['R']})",30,white,35+150*3,height-27)
 
     clock.tick(30)
     pygame.display.update()
