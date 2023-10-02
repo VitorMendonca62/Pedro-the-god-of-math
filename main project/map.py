@@ -136,6 +136,9 @@ class Map():
         self.collected[collectible.item] += 1
         collectible.collected = True
         pygame.mixer.Sound.play(COLLECT_SOUND)
+        condition_victory = analyze_victory(self.collected)
+        if condition_victory:
+          print("Terminastes")
   
   def update(self,player):
     self.analyze_collision(player)
