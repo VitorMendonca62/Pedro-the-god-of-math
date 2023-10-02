@@ -4,6 +4,7 @@ from pygame.locals import *
 from collectibles import *
 from colors import *
 from player import Player
+from score import *
 
 pygame.init()
 COLLECT_SOUND = pygame.mixer.Sound('./assets/sounds/collect_sound.mp3') # Efeito sonoro de click

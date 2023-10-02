@@ -33,7 +33,7 @@ def show_score(screen, map):
 
         text_x = text_x_left + position
         text_y = height - 50
-        draw_text(string_text, 30, white, text_x, text_y)
+        draw_text(string_text, 30, black, text_x, text_y)
 
     position = (height - 40, width)
     screen.blit(score_bar, (0,height-70))

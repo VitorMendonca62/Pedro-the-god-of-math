@@ -38,9 +38,9 @@ class Level:
         # Verifica o começo e o fim do labirinto, se a cor for vermelha, então, ele irá colocar um E na string, caso seja verda, será S
         for point in all_points:
           if point == (0,0,255):
-            string += "E"
+            string += "^"
           if point == (0,255,0):
-            string += "S"
+            string += "v"
 
         elements_row.append(string)
 
