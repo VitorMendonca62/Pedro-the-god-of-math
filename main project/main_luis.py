@@ -73,7 +73,6 @@ def instructions_screen(): # A tela de instruções
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if QUIT_BUTTON.clicked(mouse_pos):
-                    pygame.mixer.Sound.play(CLICK_SOUND)
                     main_menu()
         relogio.tick(60)
         pygame.display.update()

@@ -7,6 +7,7 @@ from player import Player
 
 pygame.init()
 player = Player(307, 298)
+COLLECT_SOUND = pygame.mixer.Sound('./assets/sounds/collect_sound.mp3') # Efeito sonoro de click
 
 class Map():
   def __init__(self,screen):
@@ -151,7 +152,9 @@ class Map():
         self.matriz_game[collectible.row][collectible.column] = self.matriz_game[collectible.row][collectible.column][:-1]
         self.collected[collectible.item] += 1
         collectible.collected = True
+        pygame.mixer.Sound.play(COLLECT_SOUND)
         print(self.collected)
+  
   def update(self,player):
     self.analyze_collision(player)
     self.move_map()
