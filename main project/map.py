@@ -19,7 +19,7 @@ class Map():
     self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
     self.background = pygame.image.load('sprites/background1.png')
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
-    self.x = 5
+    self.x = 0
     self.y = 0 
     # Ultimo valor de x e y  que foi atribuiddo
     self.last_x = 0 
