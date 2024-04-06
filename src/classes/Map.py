@@ -83,7 +83,7 @@ class Map():
     self.last_x = self.x
     self.last_y = self.y 
 
-    self.pace = 10 
+    self.pace = 4
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
@@ -103,12 +103,12 @@ class Map():
         self.x -= self.pace
   
   def analyze_collision(self, player, score):
-    # for wall in self.walls_rects:
-    #   if player.rect.colliderect(wall):
-    #     self.x = self.last_x
-    #     self.y = self.last_y
-    #     self.pace = 0
-    #     self.walls_rects = list()
+    for wall in self.walls_rects:
+      if player.rect.colliderect(wall):
+        self.x = self.last_x
+        self.y = self.last_y
+        self.pace = 0
+        self.walls_rects = list()
 
     self.matriz_game, condition_victory = self.collectibles.analyze_collision(player, self.matriz_game, self.level)
     return condition_victory
