@@ -8,14 +8,14 @@ width = 900
 height = 600
 screen = pygame.display.set_mode((width,height))
 
-def game(menu):
+def game(menu, level=2):
   pygame.init()
   game_running = True
   screen = pygame.display.set_mode((width,height))
   pygame.display.set_caption("Pedro: The God of Math")
   clock = pygame.time.Clock()
 
-  map = Map(screen)
+  map = Map(screen, level)
 
   screen.blit(map.background, (0, 0))
   player = Player((width/2, height/2)) 
@@ -37,4 +37,17 @@ def game(menu):
     pygame.display.update()
     
     if not game_running: 
-      score.victory_screen(screen,menu)
+      if map.level != 2:
+        level += 1
+        print("passou", level)
+        game_running = True
+        
+        map = Map(screen, level)
+
+        player = Player((width/2, height/2)) 
+        all_sprites = pygame.sprite.Group()
+        all_sprites.add(player)
+
+        score = Score()
+      else:
+        score.victory_screen(screen,menu)

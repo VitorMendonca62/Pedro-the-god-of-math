@@ -16,9 +16,9 @@ class Collectibles:
       "R": 0
     }
     
-  def create(self, matriz_game):
-    for symbol in symbols_collectibles.keys():
-      for _ in range(symbols_collectibles[symbol]): # quantos desse tipo eu quero
+  def create(self, matriz_game, level):
+    for symbol in symbols_collectibles[level].keys():
+      for _ in range(symbols_collectibles[level][symbol]): # quantos desse tipo eu quero
         collectible = Collectible(symbol)
       
         while collectible.adress in self.colle_adresses:
@@ -30,7 +30,7 @@ class Collectibles:
     
     return matriz_game
   
-  def analyze_collision(self, player, matriz_game, score, screen):
+  def analyze_collision(self, player, matriz_game, level):
     collectibles = self.collectibles
     condition_victory = False
     for collectible in collectibles:
@@ -40,7 +40,7 @@ class Collectibles:
         self.collected[collectible.item] += 1
         collectible.collected = True
         pygame.mixer.Sound.play(COLLECT_SOUND)
-        condition_victory = analyze_victory(self.collected)
+        condition_victory = analyze_victory(self.collected, level)
         
         if condition_victory:
           pygame.mixer.music.pause()

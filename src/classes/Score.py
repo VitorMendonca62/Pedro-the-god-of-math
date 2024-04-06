@@ -32,7 +32,7 @@ class Score:
         collectible_y = height - 55.5
         screen.blit(name, (collectible_x, collectible_y, size, size))
         
-        total_collectible = symbols_collectibles[symbol]
+        total_collectible = symbols_collectibles[map.level][symbol]
         collectible_collected = map.collectibles.collected[symbol] 
         
         string_text = f"({collectible_collected}/{total_collectible})"
@@ -75,7 +75,7 @@ class Score:
       QUIT_BUTTON.update(screen)
       
       # Conteúdo escrito da parte de instruções       
-      STRING_LIST = ["Parabens por coletar todos os coletaveis.", "Pedro esta muito orgulhoso que voce conseguiu.", "Para jogar novamente, clique na maçã"] 
+      STRING_LIST = ["Parabens por coletar todos os coletaveis.", "Pedro esta muito orgulhoso que voce conseguiu.", "Para jogar novamente, clique no X"] 
       
       # Posição inicial da escrita (será usada como referência para determinar as próximas linhas)
       initial_x = 200

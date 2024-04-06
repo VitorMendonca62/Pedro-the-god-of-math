@@ -22,14 +22,9 @@ pip install pygame
 pip install opencv_python
 ```
 
-3. Entre na pasta main project
+3. Inicie o jogo
 ```bash
-cd '.\main project\'
-```
-
-4. Inicie o jogo
-```bash
-python main.py
+python src/main.py
 ```
 
 ## Integrantes do projeto e suas responsabilidades:

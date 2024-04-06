@@ -2,19 +2,26 @@ import pygame
 from random import randint
 from utils.sprites import place_sprites_collectibles
 
-# symbols_collectibles = {
-#   "N": randint(1,3),
-#   "Z": randint(3,5),
-#   "Q": randint(2,4),
-#   "R": randint(1,3)
-#   }
 symbols_collectibles = {
-  "N": 1,
-  "Z": 0,
-  "Q": 0,
-  "R": 0
-  }
-
+  0: {
+    "N": randint(1,3),
+    "Z": randint(3,5),
+    "Q": randint(2,4),
+    "R": randint(1,3)
+  },
+  1: {
+    "N": randint(2,4),
+    "Z": randint(4,6),
+    "Q": randint(3,5),
+    "R": randint(2,4)
+  },
+  2: {
+    "N": randint(3,5),
+    "Z": randint(5,7),
+    "Q": randint(4,6),
+    "R": randint(3,5)
+  },
+}
 class Collectible():
   size = 270 / 8
   sprites = place_sprites_collectibles(size)

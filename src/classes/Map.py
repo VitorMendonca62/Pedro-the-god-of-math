@@ -6,7 +6,8 @@ from classes.Collectibles import Collectibles, symbols_collectibles
 pygame.init()
 
 class Map():
-  def __init__(self,screen):
+  size_levels = [15,18, 21]
+  def __init__(self,screen, level = 1):
     self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
     self.screen = screen
     self.horizontal_walls = pygame.image.load('src/assets/sprites//horizontal_woods.png')
@@ -14,19 +15,22 @@ class Map():
     self.background = pygame.image.load('src/assets/sprites//background1.png')
 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
-    self.x = - 15
-    self.y = -570
+
+    self.x = (- 60 * (Map.size_levels[level] - 14.5)) / 2
+    self.y = - 60 * (Map.size_levels[level] - 5.5)
     # Ultimo valor de x e y  que foi atribuiddo
     self.last_x = self.x 
     self.last_y = self.y
-    self.size_map = 15 # tamanho do mapa
+    
+    self.level = level
+    self.size_map = Map.size_levels[self.level] # tamanho do mapa
 
-    level = Level()
+    level = Level(self.level, self.size_map)
     self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
     self.draw_map(self.screen, self.x, self.y, True) # Vai desenhar o mapa
     
     self.collectibles = Collectibles()
-    self.matriz_game = self.collectibles.create(self.matriz_game)
+    self.matriz_game = self.collectibles.create(self.matriz_game, self.level)
 
   def draw_map(self, screen, x, y, born): 
     square_size = 60 # Tamanho do quadrado
@@ -65,7 +69,7 @@ class Map():
             self.x = - 15
             self.y = - square_size * (row - 4) + 21
 
-          if item in symbols_collectibles.keys():
+          if item in symbols_collectibles[self.level].keys():
             item_x += 22
             item_y += 22
             size = 20
@@ -79,7 +83,7 @@ class Map():
     self.last_x = self.x
     self.last_y = self.y 
 
-    self.pace = 4 
+    self.pace = 10 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:  
         pygame.quit()
@@ -106,7 +110,7 @@ class Map():
     #     self.pace = 0
     #     self.walls_rects = list()
 
-    self.matriz_game, condition_victory = self.collectibles.analyze_collision(player, self.matriz_game, score, self.screen)
+    self.matriz_game, condition_victory = self.collectibles.analyze_collision(player, self.matriz_game, self.level)
     return condition_victory
   def update(self,player,score):
     condition_victory = self.analyze_collision(player,score)
