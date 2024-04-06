@@ -1,24 +1,17 @@
 import pygame
-from level import Level
+from classes.Level import Level
 from pygame.locals import *
-from collectibles import *
-from colors import *
-from player import Player
-from score import *
+from classes.Collectibles import Collectibles, symbols_collectibles
 
 pygame.init()
-COLLECT_SOUND = pygame.mixer.Sound('./assets/sounds/collect_sound.mp3') # Efeito sonoro de click
 
 class Map():
   def __init__(self,screen):
-    self.all_collectibles_rects = list() # todos os coletaveis
-    self.collectibles = list() # todos os coletaveis
-    self.colle_adresses = list()
     self.walls_rects = list() # Vai estar armazenado todos os retangulos das paredes 
     self.screen = screen
-    self.horizontal_walls = pygame.image.load('sprites/horizontal_woods.png')
-    self.vertical_walls = pygame.image.load('sprites/vertical_woods.png')
-    self.background = pygame.image.load('sprites/background1.png')
+    self.horizontal_walls = pygame.image.load('src/assets/sprites//horizontal_woods.png')
+    self.vertical_walls = pygame.image.load('src/assets/sprites//vertical_woods.png')
+    self.background = pygame.image.load('src/assets/sprites//background1.png')
 
     # É no eixo das abscissas e ordenadas onde o mapa está localizado
     self.x = - 15
@@ -28,28 +21,12 @@ class Map():
     self.last_y = self.y
     self.size_map = 15 # tamanho do mapa
 
-    # Esse dicionário que vai mostrar quanto foi coletado de cada um:
-    self.collected = {
-      "N": 0,
-      "Z": 0,
-      "Q": 0,
-      "R": 0
-    }
-
     level = Level()
     self.matriz_game = level.do_matriz_map() # Vai pegar a matriz do mapa
     self.draw_map(self.screen, self.x, self.y, True) # Vai desenhar o mapa
-
-    for symbol in symbols_collectibles.keys():
-      for _ in range(symbols_collectibles[symbol]): # quantos desse tipo eu quero
-        collectible = Collectible(symbol)
-      
-        while collectible.adress in self.colle_adresses:
-          collectible = Collectible(symbol)
-
-        self.colle_adresses.append(collectible.adress)
-        self.collectibles.append(collectible)
-        self.matriz_game[collectible.row][collectible.column] += symbol
+    
+    self.collectibles = Collectibles()
+    self.matriz_game = self.collectibles.create(self.matriz_game)
 
   def draw_map(self, screen, x, y, born): 
     square_size = 60 # Tamanho do quadrado
@@ -93,7 +70,7 @@ class Map():
             item_y += 22
             size = 20
 
-            for collectible in self.collectibles:
+            for collectible in self.collectibles.collectibles:
               if collectible.row == row and collectible.column == column:
                 collectible.rect = pygame.Rect(item_x, item_y, size, size)               
                 screen.blit(collectible.sets, (item_x, item_y))
@@ -121,31 +98,19 @@ class Map():
       if keys[K_d]:  
         self.x -= self.pace
   
-  
-  def analyze_collision(self,player):
-    for wall in self.walls_rects:
-       if player.rect.colliderect(wall):
-         self.x = self.last_x
-         self.y = self.last_y
-         self.pace = 0
-         self.walls_rects = list()
+  def analyze_collision(self, player, score):
+    # for wall in self.walls_rects:
+    #   if player.rect.colliderect(wall):
+    #     self.x = self.last_x
+    #     self.y = self.last_y
+    #     self.pace = 0
+    #     self.walls_rects = list()
 
-    for collectible in self.collectibles:
-      if collectible.rect.colliderect(player) and not collectible.collected:
-        self.collectibles.remove(collectible)
-        self.matriz_game[collectible.row][collectible.column] = self.matriz_game[collectible.row][collectible.column][:-1]
-        self.collected[collectible.item] += 1
-        collectible.collected = True
-        pygame.mixer.Sound.play(COLLECT_SOUND)
-        condition_victory = analyze_victory(self.collected)
-        if condition_victory:
-          print("Terminastes")
-          pygame.mixer.music.pause()
-          pygame.mixer.Sound.play(pygame.mixer.Sound('./assets/sounds/victory_sound.mp3'))
-          victory_screen(self.screen)
-          
-          
-  def update(self,player):
-    self.analyze_collision(player)
+    self.matriz_game, condition_victory = self.collectibles.analyze_collision(player, self.matriz_game, score, self.screen)
+    return condition_victory
+  def update(self,player,score):
+    condition_victory = self.analyze_collision(player,score)
     self.move_map()
     self.draw_map(self.screen, self.x, self.y, False)
+    
+    return condition_victory
