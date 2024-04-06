@@ -8,7 +8,7 @@ width = 900
 height = 600
 screen = pygame.display.set_mode((width,height))
 
-def game(menu, level=2):
+def game(menu, level=0):
   pygame.init()
   game_running = True
   screen = pygame.display.set_mode((width,height))
